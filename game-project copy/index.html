@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #pitch-display, #target-pitch-display, #score-display {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+        canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pitch Matching Game</h1>
+    <div id="target-pitch-display">Target Pitch: -- Hz</div>
+    <div id="pitch-display">Pitch: -- Hz</div>
+    <div id="score-display">Score: 0</div>
+    
+    <!-- Canvas for visualizing pitch -->
+    <canvas id="pitch-canvas" width="600" height="300"></canvas>
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
