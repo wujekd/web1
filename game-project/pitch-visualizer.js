@@ -5,15 +5,14 @@ export default class PitchVisualizer {
         this.canvasHeight = this.canvas.height;
         this.canvasWidth = this.canvas.width;
 
-        // Arrow settings (fixed horizontally at center)
         this.arrowX = this.canvasWidth / 2;
         this.arrowY = this.canvasHeight / 2; // Initial arrow position in the middle
 
-        // Target pitch
+       
         this.targetY = this.arrowY; // Initialize target pitch in the middle
     }
 
-    // Normalize the pitch to fit within the canvas height
+    // normalajz pitch to fit within the canvas height
     normalizePitch(pitch) {
         const minFreq = 60;  // Lower bound for the frequency
         const maxFreq = 1000; // Upper bound for the frequency
@@ -23,12 +22,12 @@ export default class PitchVisualizer {
         return this.canvasHeight - ((clampedPitch - minFreq) / (maxFreq - minFreq)) * this.canvasHeight;
     }
 
-    // Set the target pitch
+    // target pitch
     setTargetPitch(targetPitch) {
         this.targetY = this.normalizePitch(targetPitch);
     }
 
-    // Function to draw the arrow at the current position
+    // arrow at the current position
     drawArrow(y) {
         this.ctx.beginPath();
         this.ctx.moveTo(this.arrowX - 10, y);
@@ -39,7 +38,7 @@ export default class PitchVisualizer {
         this.ctx.fill();
     }
 
-    // Draw the target pitch line
+    //  target pitch line
     drawTargetLine() {
         this.ctx.beginPath();
         this.ctx.moveTo(0, this.targetY);
@@ -58,14 +57,16 @@ export default class PitchVisualizer {
             this.arrowY = this.normalizePitch(pitch);
         }
 
-        // Draw the target line
+     
         this.drawTargetLine();
 
-        // Draw the arrow representing the current pitch
+      
         this.drawArrow(this.arrowY);
     }
 
-    // Function to check how close the player is to the target pitch
+   
+
+
     getScore(pitch) {
         if (pitch === -1 || pitch === Infinity) return 0;
         const normalizedPitchY = this.normalizePitch(pitch);
