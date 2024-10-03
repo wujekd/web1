@@ -26,17 +26,20 @@
             <p id="password-length-alert" class="">Password has to be at least 6 characters long</p>
             <p id="password-number-alert" class="">Password has to include a number</p>
             <p id="password-special-alert" class="">Password has to include a special character</p>
+            <p id="password-match" class="">Passwords have to be the same</p>
         </div>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
         <label for="email">Password:</label>
         <input type="text" id="password" name="password" required>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="text" id="confirmPassword" required>
+
         <button id="registerBtn" disabled class="register-btn disabled" type="submit">Register</button>
-            
     </form>
     <div id="message"></div>
 
-    <script src="register.js"></script>
+    <script src="register.js" defer></script>
 </body>
 </html>
