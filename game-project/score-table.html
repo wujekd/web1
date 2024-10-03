@@ -7,6 +7,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <style>
+        #appContainer {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        /* Fade-out transition */
+        .hidden {
+            opacity: 0;
+        }
+        
+        .screen {
+            padding: 20px;
+            border: 1px solid #333;
+            margin-top: 20px;
+            background-color: #131111;
+        }
+        
+        .options {
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <div class="cont">
     <nav class="navbar">
         <div class="nav-links">
             <a href="index.html" class="nav-item">Home</a>
@@ -16,9 +45,61 @@
         </div>
     </nav>
 
+    <nav id="options">
+        <button id="showScoreTable">Score Table</button>
+        <button id="showYourScores">Your Scores</button>
+    </nav>
 
+    <!-- Container where the templates will be injected -->
+    <div id="appContainer" class="container"></div>
+</div>
 
-    <h1>register</h1>
-    <p>register here</p>
+    <!-- Score Table Template -->
+    <template id="scoreTableTemplate">
+        <div class="screen">
+            <h1>Top Scores</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Player 1</td>
+                        <td>3000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Player 2</td>
+                        <td>2800</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Player 3</td>
+                        <td>2600</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <!-- Your Scores Template -->
+    <template id="yourScoresTemplate">
+        <div class="screen">
+            <h1>Your Scores</h1>
+            <ul>
+                <li>Score 1: 2000</li>
+                <li>Score 2: 2500</li>
+                <li>Score 3: 2700</li>
+            </ul>
+        </div>
+    </template>
+
+    <script src="score.js"></script>
+    
 </body>
 </html>

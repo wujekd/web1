@@ -13,15 +13,11 @@ document.addEventListener("DOMContentLoaded", function(){
         const check = loginAuth(username, password)
         if (check == true){
             localStorage.setItem('appState', JSON.stringify({ logged : username }));
-            //show success
-            //redirect to game
+            window.location.href = 'index.html';
         } else if (check == false) {
-            console.log("wrong password")
+            alert('Incorrect password. Please try again.');
         } else if (check == null) {
-            console.log("user doesnt exist")
+            alert('No user found with that username.');
         }
     })
-
-
-
 })
