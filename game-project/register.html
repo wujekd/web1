@@ -17,13 +17,23 @@
     </nav>
 
 
-    <form class="cont registration">
+    <form class="cont registration borderMain">
+        <div class="regLoadingBar borderMain">
+                <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
+        </div>
+        <div class="regAlert borderMain">
+            <p id="username-length-alert" class="">Username needs at least 5 characters</p>
+            <p id="password-length-alert" class="">Password has to be at least 6 characters long</p>
+            <p id="password-number-alert" class="">Password has to include a number</p>
+            <p id="password-special-alert" class="">Password has to include a special character</p>
+        </div>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
         <label for="email">Password:</label>
         <input type="text" id="password" name="password" required>
-        <button type="submit">Register</button>
+        <button id="registerBtn" disabled class="register-btn disabled" type="submit">Register</button>
+            
     </form>
     <div id="message"></div>
 

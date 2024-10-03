@@ -19,9 +19,7 @@ const levelMelody = [
     { note: "C#", frequency: 138.59, startTime: 1.642666, endTime: 2.421333 }
 ];
 
-
 function startNewRound() {
-    // Generate a random target pitch between 200Hz and 800Hz
     // const targetPitch = Math.floor(Math.random() * (800 - 200 + 1)) + 200;
     // visualizer.setTargetPitch(targetPitch);
     // audioAnalyser.setLpfFreq(targetPitch * 1.6); 
@@ -39,32 +37,25 @@ function startNewRound() {
       
         const pitch = audioAnalyser.autoCorrelate(audioAnalyser.dataArray, audioAnalyser.audioContext.sampleRate);
 
-        // Round the pitch to two decimal places and ensure time has changed
         if (pitch !== -1 && currentTime !== lastTime) {
-            const roundedPitch = Number(pitch.toFixed(2)); // Round pitch
+            const roundedPitch = Number(pitch.toFixed(2)); 
             scoreArray.push({ time: currentTime, pitch: roundedPitch });
-            lastTime = currentTime; // Update the last time value
+            lastTime = currentTime; 
         }
 
-  
         if (!audioPlayer1.paused && !audioPlayer1.ended) {
             requestAnimationFrame(collectAudioData);
         }
     }
 
-  
     audioPlayer1.addEventListener('play', () => {
         // scoreArray = [];
         requestAnimationFrame(collectAudioData);
     });
-
-
+    
     audioPlayer1.addEventListener('ended', () => {
         console.log(addScore(scoreArray, levelMelody));
     });
-
-
-  
 
    
     audioPlayer1.play();
@@ -89,14 +80,14 @@ function addScore(scoreData, levelM) {
                 
                 // perfect match (0 difference) is 100 points, and reduce score as difference increases
                 const maxScorePerNote = 100;
-                const score = Math.max(0, maxScorePerNote - pitchDifference); // Score decreases with pitch difference
+                const score = Math.max(0, maxScorePerNote - pitchDifference);
 
                 noteScore += score;
             });
 
-            // Average the score for all the matching points for this note
+         
             const averageNoteScore = noteScore / matchingNotes.length;
-            totalScore += averageNoteScore; // Add the average score for this note to the total score
+            totalScore += averageNoteScore;
             notesEvaluated++;
         }
     });
@@ -146,11 +137,7 @@ function updateMeter() {
     requestAnimationFrame(updateMeter);
 }
 
-
 updateMeter();
-
-
-
 
 
 

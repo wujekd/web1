@@ -23,7 +23,7 @@ export default class AudioAnalyser {
             // Create and set up the low-pass filter
             this.lowPassFilter = this.audioContext.createBiquadFilter();
             this.lowPassFilter.type = "lowpass";
-            this.lowPassFilter.frequency.setValueAtTime(150, this.audioContext.currentTime); // init cutoff frequency
+            this.lowPassFilter.frequency.setValueAtTime(190, this.audioContext.currentTime); // init cutoff frequency
 
             this.micGain = this.audioContext.createGain();
             this.playerGain = this.audioContext.createGain();
@@ -45,13 +45,13 @@ export default class AudioAnalyser {
             // Create the script processor node for real-time audio processing
             this.scriptProcessorNode = this.audioContext.createScriptProcessor(2048, 1, 1);
 
-            // Connect the audio graph
-            // this.source.connect(this.lowPassFilter);          // Connect source to low-pass filter
+            // Connecting the audio graph
+            // this.source.connect(this.lowPassFilter);       
             this.source.connect(this.micGain)
             this.mixer1.connect(this.lowPassFilter);
-            this.lowPassFilter.connect(this.analyser);        // Connect filter to analyser
-            this.analyser.connect(this.scriptProcessorNode);  // Connect analyser to script processor
-            this.mixer1.connect(this.audioContext.destination); // Connect to audio output
+            this.lowPassFilter.connect(this.analyser);      
+            this.analyser.connect(this.scriptProcessorNode); 
+            this.mixer1.connect(this.audioContext.destination); 
 
         } catch (error) {
             console.error('Error accessing microphone:', error);
@@ -59,14 +59,13 @@ export default class AudioAnalyser {
         }
     }
 
-    // Function to adjust the low-pass filter frequency
+    // adjust the low-pass filter frequency
     setLpfFreq(frequency) {
         if (this.lowPassFilter) {
             this.lowPassFilter.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
         }
     }
 
-    // Auto-correlation function to detect the pitch
     autoCorrelate(buffer, sampleRate) {
         let SIZE = buffer.length;
         let MAX_SAMPLES = Math.floor(SIZE / 2);
@@ -117,7 +116,7 @@ export default class AudioAnalyser {
         return -1;
     }
 
-    // Start detecting the pitch
+    // Start 
     startPitchDetection(callback) {
         this.scriptProcessorNode.onaudioprocess = () => {
             this.analyser.getFloatTimeDomainData(this.dataArray);
