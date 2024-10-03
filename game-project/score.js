@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = template.content.cloneNode(true); // Clone the template content
 
         // Fade out the current content
-        appContainer.classList.add('hidden');
+        appContainer.classList.add('hidden1');
 
         // Wait for the fade-out transition to complete, then replace content
         setTimeout(() => {
             appContainer.innerHTML = ''; // Clear current content
             appContainer.appendChild(content); // Append the new content
-            appContainer.classList.remove('hidden'); // Fade in the new content
-        }, 500); // Match the CSS transition duration
+            appContainer.classList.remove('hidden1'); // Fade in the new content
+        }, 300); // Match the CSS transition duration
     }
 
     // Event listeners for buttons
