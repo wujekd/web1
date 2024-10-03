@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             passwordSpecialAlert.textContent = 'Password has to contain a special character';
         }
 
-        if (password == confirmPassword) {
+        if (password == confirmPassword && passwordOk[0] && passwordOk[1] && passwordOk[2]) {
             passwordOk[3] = true;
             confirmPasswordAlert.classList.add("valid");
             confirmPasswordAlert.textContent = "The passwords match!"
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     form.addEventListener("submit", function(e){
         e.preventDefault();
-
+        console.log("lol")
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword");
@@ -130,11 +130,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         if (userExists(username)){
             console.log("user exists!")
         } else {
-            if (password === confirmPassword){
                 saveUser(username, password);
-            } else {
-                // passwords doesnt match
-            }
         }
     })
 
@@ -149,14 +145,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     function saveUser(username, password){
         const newUser = {
-            "username" : username,
-            "password" : password,
-            "created" : new Date().toISOString()
+            username : username,
+            password : password,
+            created : new Date().toISOString()
         }
         let users = JSON.parse(localStorage.getItem('users')) || [];
         users.push(newUser);
         localStorage.setItem("users", JSON.stringify(users));
 
     }
+
+    const regAlert = document.querySelector(".regAlert")
+    const regStartBtn = document.getElementById("regStartBtn");
+    regStartBtn.addEventListener("click", ()=> {
+                                                regAlert.classList.add("down");
+                                                regStartBtn.classList.add("hidden");
+                                            })
 
 })
