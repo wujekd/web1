@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="register.html" class="nav-item">Register</a>
+            <a href="login.html" class="nav-item">Login</a>
+            <a href="score-table.html" class="nav-item">Score Table</a>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="cont login registration borderMain">
+    <form class="cont registration">
+        <!-- Form fields for login -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button id="loginBtn" class="register-btn" type="submit">Login</button>
+    </form>
+
+</div>
+
+    <div id="message"></div>
+
+    <script src="login.js" type="module" defer></script>
+</body>
+</html>

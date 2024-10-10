@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="register.html" class="nav-item">Register</a>
+            <a href="login.html" class="nav-item">Login</a>
+            <a href="score-table.html" class="nav-item">Score Table</a>
+        </div>
+    </nav>
+
+
+    <form class="cont registration borderMain">
+        <div class="regLoadingBar borderMain">
+                <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
+        </div>
+        <div class="regAlert borderMain">
+            <p id="username-length-alert" class="">Username needs at least 5 characters</p>
+            <p id="password-length-alert" class="">Password has to be at least 6 characters long</p>
+            <p id="password-number-alert" class="">Password has to include a number</p>
+            <p id="password-special-alert" class="">Password has to include a special character</p>
+            <p id="password-match" class="">Passwords have to be the same</p>
+            <button id="regStartBtn">testsadg</button>
+        </div>
+        <!-- <div class="regAlert" style="width: 100%; background-color:antiquewhite"> -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Password:</label>
+        <input type="text" id="password" name="password" required>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="text" id="confirmPassword" required>
+
+        <button id="registerBtn" disabled class="register-btn disabled" type="submit">Register</button>
+    <!-- </div> -->
+    </form>
+    <div id="message"></div>
+    
+
+    <script src="register.js" defer></script>
+</body>
+</html>
