@@ -10,12 +10,19 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
 }
 
 h1 {
     margin-top: 20px;
 }
-
+.adminbutton{
+    margin-top: 0.2rem;
+    padding: 3px;
+    width: 19rem;
+}
 
 #pitch-display, #target-pitch-display, #score-display {
     font-size: 1.5rem;
@@ -244,14 +251,4 @@ body {
     padding: 0; /* Remove padding */
     overflow: hidden; /* Hide the button's content during the shrinking */
     pointer-events: none; /* Disable click after hiding */
-}
-
-main {
-    opacity: 0;
-    transition: opactity 0.4s ease;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
 }
