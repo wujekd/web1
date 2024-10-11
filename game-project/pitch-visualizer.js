@@ -6,20 +6,31 @@ export default class PitchVisualizer {
         this.canvasWidth = this.canvas.width;
 
         this.arrowX = this.canvasWidth / 2;
-        this.arrowY = this.canvasHeight / 2; // Initial arrow position in the middle
-        this.pathData = [];  // Array to store the path data (arrowX, arrowY)
-        this.trackLength = 1;  // Will be updated with actual track length
+        this.arrowY = this.canvasHeight / 2; 
+
+        this.pathData = []; 
+        this.targetData = [];
+        this.trackLength = 1; 
     }
 
-    // Set track length (called when the audio is loaded)
+    
     setTrackLength(trackLength) {
         this.trackLength = trackLength;
     }
 
-    // Normalize pitch to fit within the canvas height
+    
+    setTarget(targetMelody) {
+        this.targetData = targetMelody.map(note => {
+            const startX = (note.startTime / this.trackLength) * this.canvasWidth;
+            const endX = (note.endTime / this.trackLength) * this.canvasWidth;
+            const targetY = this.normalizePitch(note.frequency);
+            return { startX, endX, targetY, note: note.note };  
+        });
+    }
+
     normalizePitch(pitch) {
-        const minFreq = 60;  // Lower bound for frequency
-        const maxFreq = 700; // Upper bound for frequency
+        const minFreq = 70;  // Lower bound for frequency
+        const maxFreq = 300; // Upper bound for frequency
         const clampedPitch = Math.min(Math.max(pitch, minFreq), maxFreq);
         return this.canvasHeight - ((clampedPitch - minFreq) / (maxFreq - minFreq)) * this.canvasHeight;
     }
@@ -39,9 +50,8 @@ export default class PitchVisualizer {
     drawPath() {
         this.ctx.beginPath();
         this.ctx.lineWidth = 1.5;
-        this.ctx.strokeStyle = 'rgba(0, 255, 0, 0.7)';  // Path color (green with transparency)
+        this.ctx.strokeStyle = 'rgba(0, 255, 0, 0.9)'; 
 
-        // Loop through the stored path points and draw them
         for (let i = 0; i < this.pathData.length - 1; i++) {
             const start = this.pathData[i];
             const end = this.pathData[i + 1];
@@ -52,7 +62,36 @@ export default class PitchVisualizer {
         this.ctx.stroke();
     }
 
-    // Draw the arrow at the current position
+    
+    drawTarget() {
+        this.ctx.lineWidth = 6;
+    
+     
+        this.targetData.forEach(target => {
+            this.ctx.strokeStyle = 'rgba(255, 0, 0, 0.9)';
+            this.ctx.beginPath();
+            this.ctx.moveTo(target.startX, target.targetY);
+            this.ctx.lineTo(target.endX, target.targetY);
+            this.ctx.stroke();
+    
+         
+            this.ctx.fillStyle = 'white';
+            this.ctx.font = '14px Arial';
+            this.ctx.fillText(target.note, target.startX + 5, target.targetY - 5);
+        });
+    }
+    drawPlayhead(currentTime) {
+     
+        let position = (currentTime / this.trackLength) * this.canvasWidth;
+        this.ctx.beginPath();
+        this.ctx.moveTo(position, 0);
+        this.ctx.lineTo(position, this.canvas.height);
+        this.ctx.strokeStyle = 'blue';  // Playhead color
+        this.ctx.lineWidth = 3;  // Thicker playhead line (set to 3px)
+        this.ctx.stroke();
+    }
+
+   
     drawArrow() {
         this.ctx.beginPath();
         this.ctx.moveTo(this.arrowX - 10, this.arrowY);
@@ -63,13 +102,14 @@ export default class PitchVisualizer {
         this.ctx.fill();
     }
 
-    // Main update function
+  
     update(pitch, currentTime) {
-        this.addPathPoint(currentTime, pitch);  // Add current position to the path
-        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);  // Clear canvas
+        this.addPathPoint(currentTime, pitch); 
+        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight); 
 
-        this.updatePlayhead(currentTime);  // Update the playhead position
-        this.drawPath();  // Draw the path
-        this.drawArrow();  // Draw the arrow at the current position
+        this.drawPlayhead(currentTime);  
+        this.drawTarget(); 
+        this.drawPath();  //
+        this.drawArrow();  
     }
 }

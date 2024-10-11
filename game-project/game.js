@@ -22,10 +22,10 @@ const levelMelody = [
 ];
 
 
-    const trackLength = audioPlayer1.duration;
+    const trackLength = audioPlayer1.duration.toFixed(3);
     console.log(trackLength)  // Duration of the audio file in seconds
-    visualizer.setTrackLength(trackLength);     // Pass the length to the visualizer
-
+    visualizer.setTrackLength(trackLength);
+    visualizer.setTarget(levelMelody)   
 
 
 
