@@ -29,8 +29,8 @@ export default class PitchVisualizer {
     }
 
     normalizePitch(pitch) {
-        const minFreq = 70;  // Lower bound for frequency
-        const maxFreq = 300; // Upper bound for frequency
+        const minFreq = 110;  // Lower bound for frequency
+        const maxFreq = 250; // Upper bound for frequency
         const clampedPitch = Math.min(Math.max(pitch, minFreq), maxFreq);
         return this.canvasHeight - ((clampedPitch - minFreq) / (maxFreq - minFreq)) * this.canvasHeight;
     }
@@ -64,7 +64,7 @@ export default class PitchVisualizer {
 
     
     drawTarget() {
-        this.ctx.lineWidth = 6;
+        this.ctx.lineWidth = 8;
     
      
         this.targetData.forEach(target => {
@@ -76,7 +76,7 @@ export default class PitchVisualizer {
     
          
             this.ctx.fillStyle = 'white';
-            this.ctx.font = '14px Arial';
+            this.ctx.font = '38px Monospace';
             this.ctx.fillText(target.note, target.startX + 5, target.targetY - 5);
         });
     }
@@ -109,7 +109,7 @@ export default class PitchVisualizer {
 
         this.drawPlayhead(currentTime);  
         this.drawTarget(); 
-        this.drawPath();  //
+        this.drawPath();
         this.drawArrow();  
     }
 }

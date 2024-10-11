@@ -287,6 +287,7 @@ main {
 }
 
 .game{
+    position: relative;
     z-index: 1;
     display: flex;
     height: 100%;
@@ -296,16 +297,40 @@ main {
     align-items: center;
 }
 .game .topDisplay{
-    height: 20vh;
-    width: 75%;
-    background-color: #305764d3;
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    height: 15vh;
+    width: 290px;
+    background-color: #020d10d3;
 }
 .game .bottomDisplay {
-    height: 60vh;
-    width: 75%;
+    height: 85vh;
+    width: 95%;
     background-color: rgba(58, 97, 110, 0.839);
+}
+.topSection {
+    width: 100%;
+    background-color: #1194c0;
 }
 
 .listen{
     z-index: 5;
+}
+
+.splash {
+    background-color: #043613;
+    position: fixed;
+    padding: 1rem;
+    z-index: 100;
+    
+    /* Centering the splash screen */
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);  /* Moves it to the exact center */
+}
+.splash button {
+    font-size: 3rem;
+    padding: 4px;
+    background-color: #1194c0ae;
 }
