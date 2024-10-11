@@ -279,7 +279,7 @@ main {
     padding: 3px;
     font-size: larger;
 }
-.options, .details{
+.options, .info{
     background-color:#074b1b5c;
     width: 50%;
     margin: 2px;

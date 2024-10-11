@@ -1,4 +1,5 @@
-import loginAuth from './utilities/loginAuth.js';
+import loginAuth from './loginAuth.js';
+import { state } from "./state.js"
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         const check = loginAuth(username, password)
         if (check == true){
-            localStorage.setItem('appState', JSON.stringify({ logged : username }));
+            state.setLogged(username)
             window.location.href = 'index.html';
         } else if (check == false) {
             alert('Incorrect password. Please try again.');

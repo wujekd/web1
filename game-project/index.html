@@ -8,40 +8,21 @@
 
 </head>
 <body>
+    <script src="indexMenu.js" type="module" defer></script>
     <nav class="navbar">
         <div class="nav-links">
             <a href="index.html" class="nav-item">Home</a>
             <a href="register.html" class="nav-item">Register</a>
             <a href="login.html" class="nav-item">Login</a>
-            <a href="score-table.html" class="nav-item">Score Table</a>
+            <a href="scores.html" class="nav-item">Score Table</a>
         </div>
     </nav>
-
-    <div class="cont">
-        <button id="start-btn">START</button>
-        <div id="target-pitch-display">Target Pitch: -- Hz</div>
-        <div id="pitch-display">Pitch: -- Hz</div>
-        <div id="score-display">Score: 0</div>
-        
-        <!-- Canvas for visualizing pitch -->
-        <canvas id="pitch-canvas" width="600" height="300"></canvas>
-
-        <audio controls src="test1.mp3" id="player1"></audio>
-    </div>
-    <div class="cont">
-        <button id="log-freq">log pre processing LPF freq</button>
-        <button id="muteMic">Mute Mic</button>
-        <button id="muteAudio">Mute Audio</button>
-        <button id="unmuteMic">Unmute Mic</button>
-        <button id="unmuteAudio">Unmute Audio</button>
-        <div id="volume-meter" style="margin: 5px; width: 280px; height: 30px; background-color: lightgray;">
-            <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
+    <div class="menu cont">
+        <div class="options">
+        </div>
+        <div class="info">
+            <p>info</p>
         </div>
     </div>
-
-
-
-
-    <script type="module" src="./main.js"></script>
 </body>
 </html>

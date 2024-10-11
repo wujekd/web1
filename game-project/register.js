@@ -1,3 +1,7 @@
+// import { state } from "./state.js"
+
+console.log("test")
+
 document.addEventListener("DOMContentLoaded", ()=>{
 
     const form = document.querySelector(".registration");
@@ -122,7 +126,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     form.addEventListener("submit", function(e){
         e.preventDefault();
-        console.log("lol")
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword");
@@ -131,6 +134,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             console.log("user exists!")
         } else {
                 saveUser(username, password);
+                window.location.href = 'login.html'
         }
     })
 

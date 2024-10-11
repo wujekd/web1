@@ -64,3 +64,41 @@ game-projectbackup/score-table.html
 game-projectbackup/score.js
 game-projectbackup/style.css
 game-projectbackup/test1.mp3
+game-projectfail2/components/test.js
+game-projectfail2/game.js
+game-projectfail2/index.html
+game-projectfail2/login.html
+game-projectfail2/login.js
+game-projectfail2/main.js
+game-projectfail2/menu.html
+game-projectfail2/register.html
+game-projectfail2/register.js
+game-projectfail2/score-table.html
+game-projectfail2/score.js
+game-projectfail2/style.css
+game-projectfail2/test1.mp3
+game-projectfail2/utilities/audio-analyser.js
+game-projectfail2/utilities/levels.js
+game-projectfail2/utilities/loadView.js
+game-projectfail2/utilities/loginAuth.js
+game-projectfail2/utilities/pitch-visualizer.js
+game-projectfail2/utilities/test1.mp3
+game-projectwhy not working/components/test.js
+game-projectwhy not working/game.js
+game-projectwhy not working/index.html
+game-projectwhy not working/login.html
+game-projectwhy not working/login.js
+game-projectwhy not working/main.js
+game-projectwhy not working/menu.html
+game-projectwhy not working/register.html
+game-projectwhy not working/register.js
+game-projectwhy not working/score-table.html
+game-projectwhy not working/score.js
+game-projectwhy not working/style.css
+game-projectwhy not working/test1.mp3
+game-projectwhy not working/utilities/audio-analyser.js
+game-projectwhy not working/utilities/levels.js
+game-projectwhy not working/utilities/loadTemplate.js
+game-projectwhy not working/utilities/loginAuth.js
+game-projectwhy not working/utilities/pitch-visualizer.js
+game-projectwhy not working/utilities/test1.mp3
