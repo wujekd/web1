@@ -4,11 +4,11 @@ const dataDisplay = document.querySelector(".data")
 const pitchDisplay = document.getElementById('pitch-display');
 const scoreDisplay = document.getElementById('score-display');
 const targetPitchDisplay = document.getElementById('target-pitch-display');
-
-const visualizer = new PitchVisualizer('pitch-canvas');
+const audioPlayer1 = document.getElementById('player1')
+const visualizer = new PitchVisualizer('pitch-canvas', audioPlayer1.length);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioAnalyser = new AudioAnalyser(audioContext);
-const audioPlayer1 = document.getElementById('player1')
+
 
 let logged = false;
 let score = 0;
@@ -20,6 +20,15 @@ const levelMelody = [
     { note: "E", frequency: 164.81, startTime: 1.002666, endTime: 1.301333 },
     { note: "C#", frequency: 138.59, startTime: 1.642666, endTime: 2.421333 }
 ];
+
+
+    const trackLength = audioPlayer1.duration;
+    console.log(trackLength)  // Duration of the audio file in seconds
+    visualizer.setTrackLength(trackLength);     // Pass the length to the visualizer
+
+
+
+
 
 function startNewRound() {
     // const targetPitch = Math.floor(Math.random() * (800 - 200 + 1)) + 200;
@@ -44,6 +53,7 @@ function startNewRound() {
             scoreArray.push({ time: currentTime, pitch: roundedPitch });
             lastTime = currentTime; 
         }
+        visualizer.update(pitch, currentTime);
 
         if (!audioPlayer1.paused && !audioPlayer1.ended) {
             requestAnimationFrame(collectAudioData);
@@ -116,22 +126,14 @@ audioAnalyser.init()
 
             visualizer.update(pitch);
 
-            const currentScore = visualizer.getScore(pitch);
-            scoreDisplay.textContent = `Score: ${Math.round(currentScore)}`;
+            // const currentScore = visualizer.getScore(pitch);
+            // scoreDisplay.textContent = `Score: ${Math.round(currentScore)}`;
 
         });
     })
     .catch(error => {
         console.error('Error initializing audio analyser:', error);
     });
-
-
-
-
-
-
-
-
 
 
 
@@ -148,6 +150,21 @@ function updateMeter() {
 }
 
 updateMeter();
+
+
+
+
+
+
+
+function init(){
+    // display listen
+}
+
+
+
+
+
 
 
 
@@ -174,10 +191,11 @@ document.getElementById('unmuteAudio').addEventListener('click', () => {
 
 
 
-import getLevel from './levels.js';  
-const level1 = getLevel(0); 
-console.log(level1)
 
+const testBtn = document.getElementById("testyBtn");
+testBtn.addEventListener("click", ()=>{
+    visualizer.log();
+})
 
 
 const logFreqBtn = document.getElementById("log-freq");

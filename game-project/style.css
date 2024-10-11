@@ -25,6 +25,7 @@ h1 {
 canvas {
     border: 1px solid black;
     margin-top: 20px;
+    /* height: 900; */
 }
 
 #start-btn {
@@ -153,9 +154,8 @@ body {
 .cont{
     color: whitesmoke;
     background-color: #3333337d;
-    height: 70vh;
-    margin: 1rem;
-    padding: 2rem;
+    margin: 0.3rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -248,12 +248,12 @@ body {
 }
 
 main {
-    opacity: 0;
-    transition: opactity 0.4s ease;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+    /* opacity: 0; */
+    /* transition: opactity 0.4s ease; */
+    /* display: flex; */
+    /* height: 100%; */
+    /* justify-content: center; */
+    /* align-items: center; */
     margin: 0;
 }
 
@@ -284,4 +284,28 @@ main {
     width: 50%;
     margin: 2px;
     height: 100%;
+}
+
+.game{
+    z-index: 1;
+    display: flex;
+    height: 100%;
+    /* width: 87vw; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.game .topDisplay{
+    height: 20vh;
+    width: 75%;
+    background-color: #305764d3;
+}
+.game .bottomDisplay {
+    height: 60vh;
+    width: 75%;
+    background-color: rgba(58, 97, 110, 0.839);
+}
+
+.listen{
+    z-index: 5;
 }

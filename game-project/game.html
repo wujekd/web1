@@ -8,6 +8,7 @@
 
 </head>
 <body>
+    <button id="testyBtn">testy</button>
     <nav class="navbar">
         <div class="nav-links">
             <a href="index.html" class="nav-item">Home</a>
@@ -16,19 +17,10 @@
             <a href="score-table.html" class="nav-item">Score Table</a>
         </div>
     </nav>
+    <main>
+<div class="game">
 
-    <div class="cont">
-        <button id="start-btn">START</button>
-        <div id="target-pitch-display">Target Pitch: -- Hz</div>
-        <div id="pitch-display">Pitch: -- Hz</div>
-        <div id="score-display">Score: 0</div>
-        
-        <!-- Canvas for visualizing pitch -->
-        <canvas id="pitch-canvas" width="600" height="300"></canvas>
-
-        <audio controls src="test1.mp3" id="player1"></audio>
-    </div>
-    <div class="cont">
+    <div class="cont topDisplay">
         <button id="log-freq">log pre processing LPF freq</button>
         <button id="muteMic">Mute Mic</button>
         <button id="muteAudio">Mute Audio</button>
@@ -38,10 +30,24 @@
             <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
         </div>
     </div>
+    <div class="cont bottomDisplay">
+        <button id="start-btn">START</button>
+        <div id="target-pitch-display">Target Pitch: -- Hz</div>
+        <div id="pitch-display">Pitch: -- Hz</div>
+        <div id="score-display">Score: 0</div>
+        
+        <!-- Canvas for visualizing pitch -->
+        <canvas id="pitch-canvas" width="800" height="370"></canvas>
+
+        <audio controls src="test1.mp3" id="player1"></audio>
+    </div>
+
+</div>
+</main>
 
 
 
 
-    <script type="module" src="./game.js"></script>
+    <script type="module" src="./game.js" defer></script>
 </body>
 </html>

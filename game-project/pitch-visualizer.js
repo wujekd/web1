@@ -7,71 +7,69 @@ export default class PitchVisualizer {
 
         this.arrowX = this.canvasWidth / 2;
         this.arrowY = this.canvasHeight / 2; // Initial arrow position in the middle
-
-       
-        this.targetY = this.arrowY; // Initialize target pitch in the middle
+        this.pathData = [];  // Array to store the path data (arrowX, arrowY)
+        this.trackLength = 1;  // Will be updated with actual track length
     }
 
-    // normalajz pitch to fit within the canvas height
+    // Set track length (called when the audio is loaded)
+    setTrackLength(trackLength) {
+        this.trackLength = trackLength;
+    }
+
+    // Normalize pitch to fit within the canvas height
     normalizePitch(pitch) {
-        const minFreq = 60;  // Lower bound for the frequency
-        const maxFreq = 1000; // Upper bound for the frequency
-        // Clamp pitch between minFreq and maxFreq
+        const minFreq = 60;  // Lower bound for frequency
+        const maxFreq = 700; // Upper bound for frequency
         const clampedPitch = Math.min(Math.max(pitch, minFreq), maxFreq);
-        // Normalize the pitch to fit within canvas height
         return this.canvasHeight - ((clampedPitch - minFreq) / (maxFreq - minFreq)) * this.canvasHeight;
     }
 
-    // target pitch
-    setTargetPitch(targetPitch) {
-        this.targetY = this.normalizePitch(targetPitch);
+    // Update playhead position
+    updatePlayhead(currentTime) {
+        this.arrowX = (currentTime / this.trackLength) * this.canvasWidth;
     }
 
-    // arrow at the current position
-    drawArrow(y) {
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.arrowX - 10, y);
-        this.ctx.lineTo(this.arrowX + 10, y);
-        this.ctx.lineTo(this.arrowX, y - 20);
-        this.ctx.closePath();
-        this.ctx.fillStyle = 'red';
-        this.ctx.fill();
+    // Add the current arrow position to the path array
+    addPathPoint(currentTime, pitch) {
+        const arrowY = this.normalizePitch(pitch);
+        this.pathData.push({ x: (currentTime / this.trackLength) * this.canvasWidth, y: arrowY });
     }
 
-    //  target pitch line
-    drawTargetLine() {
+    // Draw the path from the stored pathData array
+    drawPath() {
         this.ctx.beginPath();
-        this.ctx.moveTo(0, this.targetY);
-        this.ctx.lineTo(this.canvasWidth, this.targetY);
-        this.ctx.strokeStyle = 'green'; // Green line for target pitch
-        this.ctx.lineWidth = 2;
+        this.ctx.lineWidth = 1.5;
+        this.ctx.strokeStyle = 'rgba(0, 255, 0, 0.7)';  // Path color (green with transparency)
+
+        // Loop through the stored path points and draw them
+        for (let i = 0; i < this.pathData.length - 1; i++) {
+            const start = this.pathData[i];
+            const end = this.pathData[i + 1];
+            this.ctx.moveTo(start.x, start.y);
+            this.ctx.lineTo(end.x, end.y);
+        }
+
         this.ctx.stroke();
     }
 
-    // Update the visualizer (draw arrow and target line)
-    update(pitch) {
-        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight); // Clear canvas
-
-        // Update the arrow's y position based on the pitch
-        if (pitch !== -1 && pitch !== Infinity) {
-            this.arrowY = this.normalizePitch(pitch);
-        }
-
-     
-        this.drawTargetLine();
-
-      
-        this.drawArrow(this.arrowY);
+    // Draw the arrow at the current position
+    drawArrow() {
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.arrowX - 10, this.arrowY);
+        this.ctx.lineTo(this.arrowX + 10, this.arrowY);
+        this.ctx.lineTo(this.arrowX, this.arrowY - 20);
+        this.ctx.closePath();
+        this.ctx.fillStyle = 'red';  // Arrow color
+        this.ctx.fill();
     }
 
-   
+    // Main update function
+    update(pitch, currentTime) {
+        this.addPathPoint(currentTime, pitch);  // Add current position to the path
+        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);  // Clear canvas
 
-
-    getScore(pitch) {
-        if (pitch === -1 || pitch === Infinity) return 0;
-        const normalizedPitchY = this.normalizePitch(pitch);
-        const distance = Math.abs(this.targetY - normalizedPitchY);
-        // The closer the distance, the higher the score (inverse relation)
-        return Math.max(0, 100 - distance);
+        this.updatePlayhead(currentTime);  // Update the playhead position
+        this.drawPath();  // Draw the path
+        this.drawArrow();  // Draw the arrow at the current position
     }
 }
