@@ -48,3 +48,19 @@ game-project copy/levels.js
 game-project copy/index.html
 game-project copy/components/test.js
 game-project copy/audio-analyser.js
+game-projectbackup/audio-analyser.js
+game-projectbackup/components/test.js
+game-projectbackup/index.html
+game-projectbackup/levels.js
+game-projectbackup/login.html
+game-projectbackup/login.js
+game-projectbackup/loginAuth.js
+game-projectbackup/main.js
+game-projectbackup/menu.html
+game-projectbackup/pitch-visualizer.js
+game-projectbackup/register.html
+game-projectbackup/register.js
+game-projectbackup/score-table.html
+game-projectbackup/score.js
+game-projectbackup/style.css
+game-projectbackup/test1.mp3

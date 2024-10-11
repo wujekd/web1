@@ -1,4 +1,4 @@
-import loginAuth from './loginAuth.js';
+import loginAuth from './utilities/loginAuth.js';
 
 document.addEventListener("DOMContentLoaded", function(){
 
