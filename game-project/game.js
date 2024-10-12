@@ -1,6 +1,8 @@
-import AudioAnalyser from './audio-analyser.js';
-import PitchVisualizer from './pitch-visualizer.js';
-const dataDisplay = document.querySelector(".data")
+import AudioAnalyser from './utilities/audio-analyser.js';
+import PitchVisualizer from './utilities/pitch-visualizer.js';
+import getLevelData from './utilities/getLevelData.js';
+import updateMeter from './utilities/updateMeter.js';
+const dataDisplay = document.querySelector(".data");
 const pitchDisplay = document.getElementById('pitch-display');
 const scoreDisplay = document.getElementById('score-display');
 const targetPitchDisplay = document.getElementById('target-pitch-display');
@@ -13,21 +15,17 @@ const audioAnalyser = new AudioAnalyser(audioContext);
 let logged = false;
 let score = 0;
 
-
-
 const levelMelody = [
     { note: "G#", frequency: 207.65, startTime: 0.341333, endTime: 0.8 },
     { note: "E", frequency: 164.81, startTime: 1.002666, endTime: 1.301333 },
     { note: "C#", frequency: 138.59, startTime: 1.642666, endTime: 2.421333 }
 ];
-
-
     const trackLength = audioPlayer1.duration.toFixed(3);
     console.log(trackLength)  // Duration of the audio file in seconds
     visualizer.setTrackLength(trackLength);
     visualizer.setTarget(levelMelody)   
 
-
+// getLevelData();
 
 
 function startNewRound() {
@@ -89,7 +87,6 @@ function addScore(scoreData, levelM) {
             matchingNotes.forEach(point => {
                 // Calculate the pitch difference between sung pitch and target pitch
                 const pitchDifference = Math.abs(point.pitch - targetNote.frequency);
-                
                 // perfect match (0 difference) is 100 points, and reduce score as difference increases
                 const maxScorePerNote = 100;
                 const score = Math.max(0, maxScorePerNote - pitchDifference);
@@ -97,7 +94,6 @@ function addScore(scoreData, levelM) {
                 noteScore += score;
             });
 
-         
             const averageNoteScore = noteScore / matchingNotes.length;
             totalScore += averageNoteScore;
             notesEvaluated++;
@@ -112,7 +108,6 @@ function addScore(scoreData, levelM) {
         return { score: 0, totalNotes: 0 };
     }
 }
-
 
 
 audioAnalyser.init()
@@ -135,25 +130,13 @@ audioAnalyser.init()
         console.error('Error initializing audio analyser:', error);
     });
 
+    
+
 
 
     
-
     const volumeBar = document.getElementById('volume-bar');
-
-function updateMeter() {
-    const level = audioAnalyser.getAudioLevel();
-    const widthPercentage = Math.min(level * 100, 100);
-    volumeBar.style.width = `${widthPercentage * 2.5}%`;
-    
-    requestAnimationFrame(updateMeter);
-}
-
-updateMeter();
-
-
-
-
+    updateMeter(audioAnalyser, volumeBar);
 
 
 
@@ -189,14 +172,10 @@ document.getElementById('unmuteAudio').addEventListener('click', () => {
     audioAnalyser.player2analyser(1);
 });
 
-
-
-
 const testBtn = document.getElementById("testyBtn");
 testBtn.addEventListener("click", ()=>{
     visualizer.log();
 })
-
 
 const logFreqBtn = document.getElementById("log-freq");
 logFreqBtn.addEventListener("click", ()=> {
