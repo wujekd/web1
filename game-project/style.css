@@ -274,7 +274,7 @@ main {
     background-color: #04220d;
     color: #ddd;
     border-radius: 5px;
-    width: 70%;
+    width: 70%;3
     height: 21%;
     padding: 3px;
     font-size: larger;
@@ -319,13 +319,15 @@ main {
 }
 
 .splash {
-    background-color: #043613;
+    display: none;
+    background-color: #094c1d;
     position: fixed;
-    padding: 1rem;
+    padding: 2rem;
     z-index: 100;
     
+    
     /* Centering the splash screen */
-    top: 15%;
+    top: 18%;
     left: 50%;
     transform: translate(-50%, -50%);  /* Moves it to the exact center */
 }
@@ -333,4 +335,5 @@ main {
     font-size: 3rem;
     padding: 4px;
     background-color: #1194c0ae;
+    margin: 5px;
 }

@@ -36,8 +36,9 @@ export default class PitchVisualizer {
     }
 
     // Update playhead position
-    updatePlayhead(currentTime) {
+    updatePlayhead(currentTime, pitch) {
         this.arrowX = (currentTime / this.trackLength) * this.canvasWidth;
+        this.arrowY = this.normalizePitch(pitch);
     }
 
     // Add the current arrow position to the path array
@@ -105,6 +106,7 @@ export default class PitchVisualizer {
   
     update(pitch, currentTime) {
         this.addPathPoint(currentTime, pitch); 
+        this.updatePlayhead(currentTime, pitch);
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight); 
 
         this.drawPlayhead(currentTime);  
