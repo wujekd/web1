@@ -1,5 +1,3 @@
-// utilities/gameLogic.js
-
 export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore) {
     const scoreArray = []; 
     let lastTime = -1; 
@@ -16,7 +14,6 @@ export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelo
             lastTime = currentTime; 
         }
 
-        // Update visualizer with the pitch and current time
         visualizer.update(pitch, currentTime);
 
         if (!audioPlayer1.paused && !audioPlayer1.ended) {

@@ -324,7 +324,7 @@ main {
 }
 
 .splash {
-    display: none;
+    /* display: none; */
     background-color: #094c1d;
     position: fixed;
     padding: 2rem;
@@ -335,6 +335,7 @@ main {
     top: 18%;
     left: 50%;
     transform: translate(-50%, -50%);  /* Moves it to the exact center */
+    transition: opacity 1s ease;
 }
 .splash button {
     font-size: 3rem;

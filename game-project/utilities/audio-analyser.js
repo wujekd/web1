@@ -9,18 +9,15 @@ export default class AudioAnalyser {
         this.scriptProcessorNode = null;
         this.lowPassFilter = null;  // Low-pass filter
         this.audioPlayer1 = document.getElementById("player1");
-
         this.audioLevelData = new Float32Array(this.bufferLength)
     }
 
-    
     async init() {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
             this.source = this.audioContext.createMediaStreamSource(stream);
 
-            // Create and set up the low-pass filter
             this.lowPassFilter = this.audioContext.createBiquadFilter();
             this.lowPassFilter.type = "lowpass";
             this.lowPassFilter.frequency.setValueAtTime(190, this.audioContext.currentTime); // init cutoff frequency
@@ -40,8 +37,6 @@ export default class AudioAnalyser {
 
             this.player1source.connect(this.audioContext.destination)
 
-            
-
             // Create the script processor node for real-time audio processing
             this.scriptProcessorNode = this.audioContext.createScriptProcessor(2048, 1, 1);
 
@@ -59,7 +54,6 @@ export default class AudioAnalyser {
         }
     }
 
-    // adjust the low-pass filter frequency
     setLpfFreq(frequency) {
         if (this.lowPassFilter) {
             this.lowPassFilter.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
@@ -125,7 +119,6 @@ export default class AudioAnalyser {
         };
     }
 
-
     getAudioLevel(){
         this.analyser.getFloatTimeDomainData(this.audioLevelData);
         this.sum = 0;
@@ -136,9 +129,6 @@ export default class AudioAnalyser {
         this.rms = Math.sqrt(this.sum / this.bufferLength);
         return this.rms;
     }
-
-
-
 
     mic2analyser(x){
         if (x == 1){
@@ -156,7 +146,4 @@ export default class AudioAnalyser {
             this.playerGain.gain.setValueAtTime(0, this.audioContext.currentTime);
         }
     }
-    
-
-
 }

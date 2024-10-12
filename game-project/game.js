@@ -62,6 +62,22 @@ function init(){
     // display listen
 }
 
+const listenBtn = document.getElementById('listenBtn');
+const readyBtn = document.getElementById("readyBtn");
+const splash = document.querySelector(".splash")
+
+
+
+
+
+listenBtn.addEventListener("click", ()=> audioPlayer1.play())
+
+readyBtn.addEventListener("click", ()=>{
+    splash.style.opacity = "0%"
+    splash.addEventListener("transitionend", ()=>{
+        splash.style.display = "none"
+    })
+})
 
 
 // setupEventListeners(audioAnalyser, visualizer, startNewRound, levelMelody, addScore, audioPlayer1);

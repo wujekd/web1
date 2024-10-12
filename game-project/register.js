@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const passwordRegex = {
         length: /^.{6,}$/,                 
         number: /[0-9]/,                   
-        special: /[!@#$%^&*]/                
+        special: /[!@#$%^&*/'|_-`+~?]/                
     };
 
     let usernameOk = false;
