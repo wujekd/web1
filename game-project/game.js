@@ -2,6 +2,7 @@ import AudioAnalyser from './utilities/audio-analyser.js';
 import PitchVisualizer from './utilities/pitch-visualizer.js';
 import getLevelData from './utilities/getLevelData.js';
 import updateMeter from './utilities/updateMeter.js';
+import { startNewRound, addScore } from './utilities/roundLogic.js';
 const dataDisplay = document.querySelector(".data");
 const pitchDisplay = document.getElementById('pitch-display');
 const scoreDisplay = document.getElementById('score-display');
@@ -28,87 +29,6 @@ const levelMelody = [
 // getLevelData();
 
 
-function startNewRound() {
-    // const targetPitch = Math.floor(Math.random() * (800 - 200 + 1)) + 200;
-    // visualizer.setTargetPitch(targetPitch);
-    // audioAnalyser.setLpfFreq(targetPitch * 1.6); 
-    // targetPitchDisplay.textContent = `Target Pitch: ${targetPitch} Hz`;
-    // scoreDisplay.textContent = `Score: ${score}`;
-
-    const scoreArray = []; 
-    let lastTime = -1; 
-
- 
-    function collectAudioData() {
-        const currentTime = audioPlayer1.currentTime;
-        audioAnalyser.analyser.getFloatTimeDomainData(audioAnalyser.dataArray);
-
-      
-        const pitch = audioAnalyser.autoCorrelate(audioAnalyser.dataArray, audioAnalyser.audioContext.sampleRate);
-
-        if (pitch !== -1 && currentTime !== lastTime) {
-            const roundedPitch = Number(pitch.toFixed(2)); 
-            scoreArray.push({ time: currentTime, pitch: roundedPitch });
-            lastTime = currentTime; 
-        }
-        visualizer.update(pitch, currentTime);
-
-        if (!audioPlayer1.paused && !audioPlayer1.ended) {
-            requestAnimationFrame(collectAudioData);
-        }
-    }
-
-    audioPlayer1.addEventListener('play', () => {
-        // scoreArray = [];
-        requestAnimationFrame(collectAudioData);
-    });
-    
-    audioPlayer1.addEventListener('ended', () => {
-        console.log(addScore(scoreArray, levelMelody));
-    });
-
-   
-    audioPlayer1.play();
-}
-
-function addScore(scoreData, levelM) {
-    let totalScore = 0;
-    let notesEvaluated = 0;
-    console.log(scoreData, levelM)
-
-    levelMelody.forEach(targetNote => {
-        // Filter the score data to find sung pitches that fall within the time range of this note
-        const matchingNotes = scoreData.filter(
-            point => point.time >= targetNote.startTime && point.time <= targetNote.endTime
-        );
-
-        if (matchingNotes.length > 0) {
-            let noteScore = 0;
-            matchingNotes.forEach(point => {
-                // Calculate the pitch difference between sung pitch and target pitch
-                const pitchDifference = Math.abs(point.pitch - targetNote.frequency);
-                // perfect match (0 difference) is 100 points, and reduce score as difference increases
-                const maxScorePerNote = 100;
-                const score = Math.max(0, maxScorePerNote - pitchDifference);
-
-                noteScore += score;
-            });
-
-            const averageNoteScore = noteScore / matchingNotes.length;
-            totalScore += averageNoteScore;
-            notesEvaluated++;
-        }
-    });
-
-    // If notes were evaluated, return the final score (average score per note)
-    if (notesEvaluated > 0) {
-        const finalScore = totalScore / notesEvaluated;
-        return { score: finalScore.toFixed(2), totalNotes: notesEvaluated };
-    } else {
-        return { score: 0, totalNotes: 0 };
-    }
-}
-
 
 audioAnalyser.init()
     .then(() => {
@@ -132,8 +52,6 @@ audioAnalyser.init()
 
     
 
-
-
     
     const volumeBar = document.getElementById('volume-bar');
     updateMeter(audioAnalyser, volumeBar);
@@ -146,14 +64,12 @@ function init(){
 
 
 
-
-
-
+// setupEventListeners(audioAnalyser, visualizer, startNewRound, levelMelody, addScore, audioPlayer1);
 
 
 
 const startBtn = document.getElementById("start-btn");
-startBtn.addEventListener("click", ()=> startNewRound())
+startBtn.addEventListener("click", ()=> startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore))
 
 document.getElementById('muteMic').addEventListener('click', () => {
     console.log("test mute mic")
