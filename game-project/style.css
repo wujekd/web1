@@ -341,3 +341,44 @@ main {
     background-color: #1194c0ae;
     margin: 5px;
 }
+
+.score {
+    display: grid;
+    position: absolute;
+    top: 25px;
+    left: 35px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+    background-color: #1194c0;
+}
+
+.score h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.score h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+}
+.scoreSplash {
+    display: flex;
+    display:none;
+    flex-direction: column;
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    padding: 50px;
+    font-size: xx-large;
+    transform: translate(-50%, -50%);  /* Moves it to the exact center */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    justify-items: center;
+    text-align: center;
+    background-color: #1194c0;
+    z-index: 999;
+}

@@ -1,6 +1,13 @@
+// let playListener = null;
+// let endListener = null;
+let roundActive = false; 
+
 export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore) {
-    const scoreArray = []; 
+    let scoreArray = []; 
     let lastTime = -1; 
+
+    if (roundActive) return; // Prevent a new round from starting if one is in progress
+    roundActive = true; // Mark the round as active
 
     function collectAudioData() {
         const currentTime = audioPlayer1.currentTime;
@@ -21,13 +28,21 @@ export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelo
         }
     }
 
-    audioPlayer1.addEventListener('play', () => {
+    const playListener = () => {
         requestAnimationFrame(collectAudioData);
-    });
-    
-    audioPlayer1.addEventListener('ended', () => {
+    };
+
+    const endListener = () => {
         console.log(addScore(scoreArray, levelMelody));
-    });
+        console.log(scoreArray);
+        scoreArray = []; 
+        lastTime = -1;
+        roundActive = false; 
+    };
+    
+    audioPlayer1.addEventListener('play', playListener, { once: true });
+    audioPlayer1.addEventListener('ended', endListener, { once: true });
+
 
     audioPlayer1.play();
 }

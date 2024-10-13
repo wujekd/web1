@@ -79,14 +79,22 @@ function playDemo() {
     });
 }
 
-
+let rounds = 0
 function initRound(){
     backingPlayer.play();
     clickPlayer.play();
+    rounds++;
     
     clickPlayer.addEventListener('ended', () => {
         startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore)
     });
+}
+
+const scoreSplash = document.getElementById("scoreSplash");
+const scoreSplashContinueBtn = document.getElementById("scoreSplashContinueBtn");
+
+function showScore(){
+
 }
 
 
@@ -107,4 +115,4 @@ startBtn.addEventListener("click", ()=>{
         playDemo();
     })
 
-adminEvListeners(audioAnalyser, visualizer)
+adminEvListeners(audioAnalyser)
