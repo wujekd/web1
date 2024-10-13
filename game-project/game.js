@@ -4,6 +4,7 @@ import updateMeter from './utilities/updateMeter.js';
 import { startNewRound, addScore } from './utilities/roundLogic.js';
 import getLevelData from './levels/levels.js';
 import adminEvListeners from './utilities/adminEvListeners.js';
+import { state } from "./utilities/state.js"
 const dataDisplay = document.querySelector(".data");
 const pitchDisplay = document.getElementById('pitch-display');
 const scoreDisplay = document.getElementById('score-display');
@@ -13,11 +14,10 @@ const visualizer = new PitchVisualizer('pitch-canvas', audioPlayer1.length);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioAnalyser = new AudioAnalyser(audioContext);
 
-let logged = false;
-let score = 0;
+if (!state.getLogged()){ window.location.href = 'index.html'}
 
-
-const levelData = getLevelData(0)
+const level = state.getLevelState()
+const levelData = getLevelData(level)
 const levelMelody = levelData.levelMelody
 
 visualizer.setTrackLength(audioPlayer1.duration.toFixed(3));
@@ -49,15 +49,11 @@ const volumeBar = document.getElementById('volume-bar');
 updateMeter(audioAnalyser, volumeBar);
 
 
-
 const listenBtn = document.getElementById('listenBtn');
 const readyBtn = document.getElementById("readyBtn");
 const splash = document.querySelector(".splash")
 
-
-
 listenBtn.addEventListener("click", ()=> audioPlayer1.play())
-
 readyBtn.addEventListener("click", ()=>{
     splash.style.opacity = "0%"
     splash.addEventListener("transitionend", ()=>{
@@ -67,8 +63,10 @@ readyBtn.addEventListener("click", ()=>{
 
 
 
+
 const startBtn = document.getElementById("start-btn");
-startBtn.addEventListener("click", ()=> startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore))
+startBtn.addEventListener("click", ()=>{ 
+    startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore)})
 
 
 

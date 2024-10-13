@@ -21,5 +21,9 @@ export const state = {
             currentState = JSON.parse(localStorage.getItem('gameState'));
         }
         return currentState.logged;
+    },
+    getLevelState: ()=> {
+        const levelData = JSON.parse(localStorage.getItem('gameState'))
+        return levelData.level;
     }
 };
