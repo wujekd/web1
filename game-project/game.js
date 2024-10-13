@@ -80,7 +80,7 @@ function showRoundResult(){
     roundResultSplash.style.opacity = "100%";
 
     finishRoundBtn.addEventListener("click", ()=>{
-        window.location.replace("dashboard.html");
+        window.location.replace("dash.html");
     })
     
     // final animations

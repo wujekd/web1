@@ -404,3 +404,21 @@ main {
 
     transition: opacity 0.7s ease;
 }
+
+.dash{
+    display: flex;
+    background-color: #1194c081;
+    width: 85vw;
+    height: 85vh;
+}
+
+.dash * {
+    border: 3px solid #041308;
+}
+
+.leftContainer{
+    flex-grow: 2;
+}
+.leftContainer > * {
+    height: 50%;
+}
