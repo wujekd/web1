@@ -15,13 +15,12 @@ function renderMenu(logged, top, games) {
             <button class="menu-btn" id="logoutBtn">Log Out</button>
         `;
 
-        // Add event listeners for buttons
         optionsDiv.querySelector('#playBtn').addEventListener("click", () => {
             window.location.href = "game.html";
             const state = JSON.parse(localStorage.getItem("gameState"));
-            state.level = 0 // FOR NOW HARD CODED TO LEVEL 0
+            state.level = 0 // FOR NOW HARD CODED TO LVL 0 </////////////////////
             localStorage.setItem("gameState", JSON.stringify(state))
-        }); //ASDGASG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        });
 
         optionsDiv.querySelector('#scoresBtn').addEventListener("click", () => {
             window.location.href = "scores.html"; 
@@ -40,7 +39,6 @@ function renderMenu(logged, top, games) {
             <button class="menu-btn" id="scoresBtn">Scores</button>
         `;
 
-        // Add event listeners for buttons
         optionsDiv.querySelector('#registerBtn').addEventListener("click", () => {
             window.location.href = "register.html";
         });

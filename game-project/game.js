@@ -6,11 +6,21 @@ import getLevelData from './levels/levels.js';
 import adminEvListeners from './utilities/adminEvListeners.js';
 import { state } from "./utilities/state.js"
 import { saveGame } from './utilities/gamesHistory.js';
+import { showScore } from './utilities/splashScreens.js';
+import { pitchDisplayRefresh } from './utilities/pitchDisplayRefresh.js';
 
-const dataDisplay = document.querySelector(".data");
+const volumeBar = document.getElementById('volume-bar');
+const scoreSplash = document.getElementById("scoreSplash");
+const scoreSplashDisplay = document.getElementById("scoreSplashDisplay");
+const scoreSplashContinueBtn = document.getElementById("scoreSplashContinueBtn");
+let roundCount = 0
+let scores = []
+let bestRound = [0, null];
+const listenBtn = document.getElementById('listenBtn');
+const readyBtn = document.getElementById("readyBtn");
+const splash = document.querySelector(".splash")
+
 const pitchDisplay = document.getElementById('pitch-display');
-const scoreDisplay = document.getElementById('score-display');
-const targetPitchDisplay = document.getElementById('target-pitch-display');
 const audioPlayer1 = document.getElementById('player1')
 const backingPlayer = document.getElementById("backingPlayer");
 const clickPlayer = document.getElementById("clickPlayer");
@@ -24,6 +34,7 @@ const level = state.getLevelState()
 const levelData = getLevelData(level)
 const levelMelody = levelData.levelMelody
 
+
 //load audio files based on level data 
 
 visualizer.setTrackLength(audioPlayer1.duration.toFixed(3));
@@ -33,12 +44,7 @@ visualizer.setTarget(levelMelody)
 audioAnalyser.init()
     .then(() => {
         audioAnalyser.startPitchDetection(pitch => {
-            if (pitch !== -1 && pitch !== Infinity) {
-                pitchDisplay.textContent = `Pitch: ${Math.round(pitch)} Hz`;
-            } else {
-                pitchDisplay.textContent = 'Pitch: -- Hz';
-            }
-
+            pitchDisplayRefresh(pitch, pitchDisplay)
             visualizer.update(pitch);
         });
     })
@@ -46,22 +52,8 @@ audioAnalyser.init()
         console.error('Error initializing audio analyser:', error);
     });
 
-    
-const volumeBar = document.getElementById('volume-bar');
+
 updateMeter(audioAnalyser, volumeBar);
-
-
-const listenBtn = document.getElementById('listenBtn');
-const readyBtn = document.getElementById("readyBtn");
-const splash = document.querySelector(".splash")
-
-listenBtn.addEventListener("click", playDemo)
-readyBtn.addEventListener("click", ()=>{
-    splash.style.opacity = "0%"
-    splash.addEventListener("transitionend", ()=>{
-        splash.style.display = "none"
-    })
-})
 
 function playDemo() {
     backingPlayer.play();
@@ -81,12 +73,20 @@ function initRound(){
     });
 }
 
-const scoreSplash = document.getElementById("scoreSplash");
-const scoreSplashDisplay = document.getElementById("scoreSplashDisplay");
-const scoreSplashContinueBtn = document.getElementById("scoreSplashContinueBtn");
-let roundCount = 0
-let scores = []
-let bestRound = [0, null];
+const roundResultSplash = document.getElementById("roundResultSplash");
+const finishRoundBtn = document.getElementById("finishRoundBtn");
+function showRoundResult(){
+    roundResultSplash.style.display = "flex";
+    roundResultSplash.style.opacity = "100%";
+
+    finishRoundBtn.addEventListener("click", ()=>{
+        window.location.replace("dashboard.html");
+    })
+    
+    // final animations
+    // add beat
+}
+
 
 function roundEnded(score, noteScores, scoreArray){
     scores.push([score, noteScores, scoreArray]);
@@ -97,29 +97,13 @@ function roundEnded(score, noteScores, scoreArray){
     roundCount++;
 
     if (roundCount > 2){
-        //save the game 
-        // saveGame(state.getLogged, level, score, noteScores, scoreArray);
-        
-        console.log("best score: ", scores[bestRound[1]])
+        saveGame(state.getLogged, level, score, noteScores, scoreArray);
+        showRoundResult()
 
-        //show game score => continue
     } else {
-        showScore(score);
+        showScore(score, scoreSplash);
     }
 }
-
-function showScore(score){
-    scoreSplash.style.display = "flex";
-    scoreSplashDisplay.textContent = score.toString();
-    scoreSplash.style.opacity = "100%"
-    scoreSplashContinueBtn.addEventListener("click", ()=>{
-        scoreSplash.style.opacity = "0%";
-        scoreSplash.addEventListener("transitionend", ()=>{
-            scoreSplash.style.display = "none";
-        }, {once:true})
-    },{once:true})
-}
-
 
 
 const startBtn = document.getElementById("start-btn");
@@ -127,6 +111,14 @@ startBtn.addEventListener("click", ()=>{
     initRound()
 })
 
+listenBtn.addEventListener("click", playDemo)
+
+readyBtn.addEventListener("click", ()=>{
+    splash.style.opacity = "0%"
+    splash.addEventListener("transitionend", ()=>{
+        splash.style.display = "none"
+    })
+})
 
 
 adminEvListeners(audioAnalyser)
