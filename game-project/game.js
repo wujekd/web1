@@ -24,7 +24,6 @@ const level = state.getLevelState()
 const levelData = getLevelData(level)
 const levelMelody = levelData.levelMelody
 
-
 //load audio files based on level data 
 
 visualizer.setTrackLength(audioPlayer1.duration.toFixed(3));
@@ -64,9 +63,6 @@ readyBtn.addEventListener("click", ()=>{
     })
 })
 
-
-
-
 function playDemo() {
     backingPlayer.play();
     clickPlayer.play();
@@ -76,37 +72,52 @@ function playDemo() {
     });
 }
 
-let roundCount = 0
-
 
 function initRound(){
     backingPlayer.play();
     clickPlayer.play();
-   
-    
     clickPlayer.addEventListener('ended', () => {
         startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, roundEnded)
     });
 }
 
 const scoreSplash = document.getElementById("scoreSplash");
+const scoreSplashDisplay = document.getElementById("scoreSplashDisplay");
 const scoreSplashContinueBtn = document.getElementById("scoreSplashContinueBtn");
+let roundCount = 0
+let scores = []
+let bestRound = [0, null];
 
 function roundEnded(score, noteScores, scoreArray){
-    showScore(score);
-
-    console.log(noteScores)
-    saveGame(state.getLogged, level, score, noteScores, scoreArray);
+    scores.push([score, noteScores, scoreArray]);
+    if (score > bestRound[0]){
+        bestRound[0] = score;
+        bestRound[1] = roundCount;
+    }
+    roundCount++;
 
     if (roundCount > 2){
         //save the game 
+        // saveGame(state.getLogged, level, score, noteScores, scoreArray);
+        
+        console.log("best score: ", scores[bestRound[1]])
+
         //show game score => continue
-        //redirect to your games 
+    } else {
+        showScore(score);
     }
 }
 
 function showScore(score){
-    console.log(score)
+    scoreSplash.style.display = "flex";
+    scoreSplashDisplay.textContent = score.toString();
+    scoreSplash.style.opacity = "100%"
+    scoreSplashContinueBtn.addEventListener("click", ()=>{
+        scoreSplash.style.opacity = "0%";
+        scoreSplash.addEventListener("transitionend", ()=>{
+            scoreSplash.style.display = "none";
+        }, {once:true})
+    },{once:true})
 }
 
 
@@ -117,10 +128,5 @@ startBtn.addEventListener("click", ()=>{
 })
 
 
-
-    const testBtn = document.getElementById("testyBtn");
-    testBtn.addEventListener("click", ()=>{
-        playDemo();
-    })
 
 adminEvListeners(audioAnalyser)
