@@ -1,6 +1,6 @@
 const menuElement = document.querySelector(".menu");
 
-import { state } from "./state.js";
+import { state } from "./utilities/state.js";
 
 function renderMenu(logged, top, games) {
     const optionsDiv = menuElement.querySelector(".options");
