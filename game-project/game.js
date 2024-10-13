@@ -1,10 +1,12 @@
 import AudioAnalyser from './utilities/audio-analyser.js';
 import PitchVisualizer from './utilities/pitch-visualizer.js';
 import updateMeter from './utilities/updateMeter.js';
-import { startNewRound, addScore } from './utilities/roundLogic.js';
+import { startNewRound } from './utilities/roundLogic.js';
 import getLevelData from './levels/levels.js';
 import adminEvListeners from './utilities/adminEvListeners.js';
 import { state } from "./utilities/state.js"
+import { saveGame } from './utilities/gamesHistory.js';
+
 const dataDisplay = document.querySelector(".data");
 const pitchDisplay = document.getElementById('pitch-display');
 const scoreDisplay = document.getElementById('score-display');
@@ -12,7 +14,6 @@ const targetPitchDisplay = document.getElementById('target-pitch-display');
 const audioPlayer1 = document.getElementById('player1')
 const backingPlayer = document.getElementById("backingPlayer");
 const clickPlayer = document.getElementById("clickPlayer");
-
 const visualizer = new PitchVisualizer('pitch-canvas', audioPlayer1.length);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioAnalyser = new AudioAnalyser(audioContext);
@@ -40,10 +41,6 @@ audioAnalyser.init()
             }
 
             visualizer.update(pitch);
-
-            // const currentScore = visualizer.getScore(pitch);
-            // scoreDisplay.textContent = `Score: ${Math.round(currentScore)}`;
-
         });
     })
     .catch(error => {
@@ -79,25 +76,38 @@ function playDemo() {
     });
 }
 
-let rounds = 0
+let roundCount = 0
+
+
 function initRound(){
     backingPlayer.play();
     clickPlayer.play();
-    rounds++;
+   
     
     clickPlayer.addEventListener('ended', () => {
-        startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore)
+        startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, roundEnded)
     });
 }
 
 const scoreSplash = document.getElementById("scoreSplash");
 const scoreSplashContinueBtn = document.getElementById("scoreSplashContinueBtn");
 
-function showScore(){
+function roundEnded(score, noteScores, scoreArray){
+    showScore(score);
 
+    console.log(noteScores)
+    saveGame(state.getLogged, level, score, noteScores, scoreArray);
+
+    if (roundCount > 2){
+        //save the game 
+        //show game score => continue
+        //redirect to your games 
+    }
 }
 
-
+function showScore(score){
+    console.log(score)
+}
 
 
 
@@ -105,8 +115,6 @@ const startBtn = document.getElementById("start-btn");
 startBtn.addEventListener("click", ()=>{ 
     initRound()
 })
-
-
 
 
 

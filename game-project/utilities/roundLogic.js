@@ -1,20 +1,17 @@
-// let playListener = null;
-// let endListener = null;
-let roundActive = false; 
+let roundActive = false;
 
-export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore) {
+export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, onEnded) {
     let scoreArray = []; 
     let lastTime = -1; 
 
-    if (roundActive) return; // Prevent a new round from starting if one is in progress
-    roundActive = true; // Mark the round as active
+    if (roundActive) return;
+    roundActive = true;
 
     function collectAudioData() {
         const currentTime = audioPlayer1.currentTime;
         audioAnalyser.analyser.getFloatTimeDomainData(audioAnalyser.dataArray);
 
         const pitch = audioAnalyser.autoCorrelate(audioAnalyser.dataArray, audioAnalyser.audioContext.sampleRate);
-
         if (pitch !== -1 && currentTime !== lastTime) {
             const roundedPitch = Number(pitch.toFixed(2)); 
             scoreArray.push({ time: currentTime, pitch: roundedPitch });
@@ -31,25 +28,24 @@ export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelo
     const playListener = () => {
         requestAnimationFrame(collectAudioData);
     };
-
     const endListener = () => {
-        console.log(addScore(scoreArray, levelMelody));
-        console.log(scoreArray);
+        
+        roundActive = false;
+        const { overallScore, noteScores } = addScore(scoreArray, levelMelody);
+        onEnded(overallScore, noteScores, scoreArray);
         scoreArray = []; 
         lastTime = -1;
-        roundActive = false; 
     };
     
     audioPlayer1.addEventListener('play', playListener, { once: true });
     audioPlayer1.addEventListener('ended', endListener, { once: true });
-
-
     audioPlayer1.play();
 }
 
-export function addScore(scoreData, levelMelody) {
+function addScore(scoreData, levelMelody) {
     let totalScore = 0;
     let notesEvaluated = 0;
+    let noteScores = [];  // Array to store individual note scores
 
     levelMelody.forEach(targetNote => {
         const matchingNotes = scoreData.filter(
@@ -68,13 +64,19 @@ export function addScore(scoreData, levelMelody) {
             const averageNoteScore = noteScore / matchingNotes.length;
             totalScore += averageNoteScore;
             notesEvaluated++;
+
+            // Store the average score for this note
+            noteScores.push({ note: targetNote.note, score: averageNoteScore.toFixed(2) });
+        } else {
+            // If no matching notes, still add the note with a score of 0
+            noteScores.push({ note: targetNote.note, score: "0" });
         }
     });
 
+    let overallScore = 0;
     if (notesEvaluated > 0) {
-        const finalScore = totalScore / notesEvaluated;
-        return { score: finalScore.toFixed(2), totalNotes: notesEvaluated };
-    } else {
-        return { score: 0, totalNotes: 0 };
+        overallScore = (totalScore / notesEvaluated).toFixed(2);
     }
+
+    return { overallScore, noteScores };  // Return both overall score and note scores
 }

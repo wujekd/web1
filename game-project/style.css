@@ -301,8 +301,8 @@ main {
 }
 .game .adminPanel{
     position: absolute;
-    top: -27px;
-    right: -27px;
+    top: -10px;
+    right: 0px;
     height: 17vh;
     width: 290px;
     background-color: #020d10d3;
