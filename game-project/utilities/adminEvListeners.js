@@ -17,11 +17,6 @@ export default function(audioAnalyser, visualizer){
         audioAnalyser.player2analyser(1);
     });
 
-    const testBtn = document.getElementById("testyBtn");
-    testBtn.addEventListener("click", ()=>{
-        visualizer.log();
-    })
-
     const logFreqBtn = document.getElementById("log-freq");
     logFreqBtn.addEventListener("click", ()=> {
         console.log(audioAnalyser.lowPassFilter.frequency)

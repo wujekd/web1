@@ -10,6 +10,9 @@ const pitchDisplay = document.getElementById('pitch-display');
 const scoreDisplay = document.getElementById('score-display');
 const targetPitchDisplay = document.getElementById('target-pitch-display');
 const audioPlayer1 = document.getElementById('player1')
+const backingPlayer = document.getElementById("backingPlayer");
+const clickPlayer = document.getElementById("clickPlayer");
+
 const visualizer = new PitchVisualizer('pitch-canvas', audioPlayer1.length);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioAnalyser = new AudioAnalyser(audioContext);
@@ -19,6 +22,9 @@ if (!state.getLogged()){ window.location.href = 'index.html'}
 const level = state.getLevelState()
 const levelData = getLevelData(level)
 const levelMelody = levelData.levelMelody
+
+
+//load audio files based on level data 
 
 visualizer.setTrackLength(audioPlayer1.duration.toFixed(3));
 visualizer.setTarget(levelMelody)   
@@ -53,7 +59,7 @@ const listenBtn = document.getElementById('listenBtn');
 const readyBtn = document.getElementById("readyBtn");
 const splash = document.querySelector(".splash")
 
-listenBtn.addEventListener("click", ()=> audioPlayer1.play())
+listenBtn.addEventListener("click", playDemo)
 readyBtn.addEventListener("click", ()=>{
     splash.style.opacity = "0%"
     splash.addEventListener("transitionend", ()=>{
@@ -64,12 +70,41 @@ readyBtn.addEventListener("click", ()=>{
 
 
 
+function playDemo() {
+    backingPlayer.play();
+    clickPlayer.play();
+    
+    clickPlayer.addEventListener('ended', () => {
+        audioPlayer1.play();
+    });
+}
+
+
+function initRound(){
+    backingPlayer.play();
+    clickPlayer.play();
+    
+    clickPlayer.addEventListener('ended', () => {
+        startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore)
+    });
+}
+
+
+
+
+
 const startBtn = document.getElementById("start-btn");
 startBtn.addEventListener("click", ()=>{ 
-    startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelody, addScore)})
+    initRound()
+})
 
 
 
 
+
+    const testBtn = document.getElementById("testyBtn");
+    testBtn.addEventListener("click", ()=>{
+        playDemo();
+    })
 
 adminEvListeners(audioAnalyser, visualizer)
