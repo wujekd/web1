@@ -1,4 +1,5 @@
 import { pubsub } from "../utilities/pubsub.js";
+import { state } from "../utilities/state.js";
 
 export const displayComponent = {
 
@@ -45,6 +46,10 @@ export const displayComponent = {
         tempoInfo.innerHTML = level.tempo,toString();
         descriptionInfo.innerHTML = level.info;
         playLevelBtn.innerHTML = `Play level ${ level.name }`
+        playLevelBtn.addEventListener("click", ()=>{
+            state.setLevelState(level.id)
+            setTimeout(()=>{window.location.replace("../game.html")}, 10)
+        })
 
         infoDash.appendChild(div);
     }
