@@ -1,6 +1,7 @@
 import { pubsub } from "../utilities/pubsub.js";
 import levels from "../levels/levels.js";
 import { state } from "../utilities/state.js";
+import { gamesHistoryComponent } from "./gamesHistoryComponent.js";
 
 export const lvlsComponent = {
     lvList: levels('all'),

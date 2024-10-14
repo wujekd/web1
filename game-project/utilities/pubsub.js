@@ -14,7 +14,7 @@ export const pubsub = {
       }
     },
     publish: function(evName, data) {
-      console.log(`PUBSUB: Making an broadcast about ${evName} with ${data}`);
+      console.log(`PUBSUB: Making an broadcast about ${evName} with ${data.name} level`);
       //emit|publish|announce the event to anyone who is subscribed
       if (this.events[evName]) {
         this.events[evName].forEach(f => {

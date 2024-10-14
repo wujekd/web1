@@ -22,11 +22,16 @@ export const gamesHistoryComponent = {
             `;
             gameButton.addEventListener("click", () => {
                 
-                console.log(`Game ${index + 1} clicked`, game);
+                gamesHistoryComponent.select(index);
             });
 
             element.appendChild(gameButton); 
             
         });
+    },
+
+
+    select: (index)=>{
+        pubsub.publish("gameSelected", gamesHistoryComponent.games[index]);
     }
 };
