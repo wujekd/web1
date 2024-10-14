@@ -2,6 +2,7 @@ import PitchVisualizer from "../utilities/pitch-visualizer.js";
 import { gamesHistoryComponent } from "./gamesHistoryComponent.js";
 import { lvlsComponent } from "./lvlsComponent.js";
 import { pullGames } from "../utilities/getGamesHistory.js"
+import { displayComponent } from "./displayComponent.js";
 
 
 
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     lvlsComponent.render();
     gamesHistoryComponent.render();
 
+    displayComponent.init();
 
     function animatePathDrawing(roundData, visualiser, interval = 30) {
         let index = 0; 

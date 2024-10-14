@@ -9,11 +9,14 @@ export const lvlsComponent = {
         let element = document.querySelector(".leveList");
         lvlsComponent.lvList.forEach((lvl, index) => {
             const lvlBtn = document.createElement("button");
-            lvlBtn.addEventListener('click', ()=>{
-                state.setLevelState(index + 1)
-            })
-            lvlBtn.textContent = `Level ${index + 1}`;
+            lvlBtn.addEventListener('click', ()=> lvlsComponent.select(index))
+            lvlBtn.textContent = `Level ${index + 1}`
             element.appendChild(lvlBtn);
         });
+    },
+    select: (index)=> {
+
+        pubsub.publish("levelSelected", lvlsComponent.lvList[index]);
+
     }
 };
