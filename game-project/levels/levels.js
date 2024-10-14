@@ -1,7 +1,15 @@
 
     const levels = [
         {
-            name: "Mic Check",
+            name: "Keep Steady!",
+            description: "Just a C# arpeggio...",
+            points: 45,
+            levelMelody: [
+            ],
+            tempo: 99
+        },
+        {
+            name: "A Minor Fall",
             description: "A simple challenge for maintaining steady pitch.",
             points: 45,
             levelMelody: [
@@ -12,10 +20,14 @@
             tempo: 99
         },
         {
-            name: "Minor Nostalgia",
-            description: "Just a C# arpeggio...",
-            points: 45
+            name: "A Major Lift",
+            description: "Puts a smile on your F - A - C - E",
+            points: 45,
+            levelMelody: [
+            ],
+            tempo: 99
         },
+        
     ]
 
 
@@ -23,6 +35,6 @@
         if (level == "all"){
             return levels;
         }
-        
-        return levels[level]
+        // const temp = parseInt(level)
+        return levels[level - 1];
     }

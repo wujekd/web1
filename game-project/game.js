@@ -2,7 +2,7 @@ import AudioAnalyser from './utilities/audio-analyser.js';
 import PitchVisualizer from './utilities/pitch-visualizer.js';
 import updateMeter from './utilities/updateMeter.js';
 import { startNewRound } from './utilities/roundLogic.js';
-import getLevelData from './levels/levels.js';
+import getCurrentLevel from './levels/levels.js';
 import adminEvListeners from './utilities/adminEvListeners.js';
 import { state } from "./utilities/state.js"
 import { saveGame } from './utilities/gamesHistory.js';
@@ -30,9 +30,11 @@ const audioAnalyser = new AudioAnalyser(audioContext);
 
 if (!state.getLogged()){ window.location.href = 'index.html'}
 
-const level = state.getLevelState()
-const levelData = getLevelData(level)
-const levelMelody = levelData.levelMelody
+const level = state.getCurrentLevel();
+// console.log(level);
+const levelData = state.getCurrentLevel();
+const levelMelody = levelData.levelMelody;
+
 
 
 //load audio files based on level data 

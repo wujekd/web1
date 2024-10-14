@@ -405,11 +405,12 @@ main {
     transition: opacity 0.7s ease;
 }
 
-.dash{
+.dash {
     display: flex;
     background-color: #1194c081;
-    width: 85vw;
-    height: 85vh;
+    width: 90vw;
+    height: 90vh;
+    margin-top: 40px;
 }
 
 .dash * {
@@ -423,7 +424,11 @@ main {
     height: 50%;
 }
 
-.gamesHistory, .leveList {
+.gamesHistory, .leveList, .dashDisplay {
     display: flex;
     flex-direction: column;
+}
+.gamesHistory{
+    overflow-y: scroll;
+    max-height: 97%;
 }

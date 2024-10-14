@@ -1,3 +1,5 @@
+import getLevel from "../levels/levels.js";
+
 export const state = {
     init: () => {
         if (!localStorage.getItem('gameState')) {
@@ -22,8 +24,23 @@ export const state = {
         }
         return currentState.logged;
     },
-    getLevelState: ()=> {
-        const levelData = JSON.parse(localStorage.getItem('gameState'))
-        return levelData.level;
+    getCurrentLevel: ()=> {
+        const gameState = JSON.parse(localStorage.getItem('gameState'))
+        const level = gameState.level;
+        console.log(level)
+        return getLevel(level);
+    },
+
+    setLevelState: (lvl)=> {
+        const levelData = JSON.parse(localStorage.getItem('gameState'));
+        const newLvl = parseInt(lvl);
+        levelData.level = newLvl.toString();
+        localStorage.setItem("gameState", JSON.stringify(levelData));
+
+        setTimeout(()=>{
+            window.location.href ="../game.html"
+        }, 100)
+
+        
     }
 };
