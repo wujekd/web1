@@ -35,7 +35,7 @@ export default class AudioAnalyser {
             this.playerGain.connect(this.mixer1)
             this.micGain.connect(this.mixer1)
 
-            this.player1source.connect(this.audioContext.destination)
+            // this.player1source.connect(this.audioContext.destination)
 
             // Create the script processor node for real-time audio processing
             this.scriptProcessorNode = this.audioContext.createScriptProcessor(2048, 1, 1);
@@ -46,7 +46,7 @@ export default class AudioAnalyser {
             this.mixer1.connect(this.lowPassFilter);
             this.lowPassFilter.connect(this.analyser);      
             this.analyser.connect(this.scriptProcessorNode); 
-            this.mixer1.connect(this.audioContext.destination); 
+            // this.mixer1.connect(this.audioContext.destination); 
 
         } catch (error) {
             console.error('Error accessing microphone:', error);
