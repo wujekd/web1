@@ -112,4 +112,9 @@ export default class PitchVisualizer {
         this.drawPath();
         this.drawArrow();  
     }
+
+    clear(){
+        this.pathData = [];
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
 }

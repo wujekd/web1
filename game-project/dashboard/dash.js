@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     lvlsComponent.render();
     gamesHistoryComponent.render();
 
-    displayComponent.init();
+    displayComponent.init(visualiser);
 
     function animatePathDrawing(roundData, visualiser, interval = 30) {
         let index = 0; 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         drawNextPoint();
     }
 
-    animatePathDrawing(roundData, visualiser, 10);
+    // animatePathDrawing(roundData, visualiser, 10);
 
 
     visualiser.setTarget(targetMelody);
