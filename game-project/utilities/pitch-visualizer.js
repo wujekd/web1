@@ -1,5 +1,5 @@
 export default class PitchVisualizer {
-    constructor(canvasId) {
+    constructor(canvasId, trackLength = 1, resizeCanvas = false) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
         this.canvasHeight = this.canvas.height;
@@ -8,11 +8,23 @@ export default class PitchVisualizer {
         this.arrowY = this.canvasHeight / 2; 
         this.pathData = []; 
         this.targetData = [];
-        this.trackLength = 1; 
+        this.trackLength = trackLength;
+
+        // Conditionally resize canvas
+        if (resizeCanvas) {
+            this.dashboardMode();
+        }
     }
     
     setTrackLength(trackLength) {
         this.trackLength = trackLength;
+    }
+    dashboardMode(){
+ 
+            this.canvas.width = 600;
+            this.canvas.height = 200;
+            this.canvasHeight = this.canvas.height;
+            this.canvasWidth = this.canvas.width;
     }
 
     setTarget(targetMelody) {
