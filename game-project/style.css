@@ -422,3 +422,8 @@ main {
 .leftContainer > * {
     height: 50%;
 }
+
+.gamesHistory, .leveList {
+    display: flex;
+    flex-direction: column;
+}

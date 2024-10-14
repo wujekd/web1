@@ -20,5 +20,9 @@
 
 
     export default function(level){
+        if (level == "all"){
+            return levels;
+        }
+        
         return levels[level]
     }

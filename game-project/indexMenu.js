@@ -16,7 +16,7 @@ function renderMenu(logged, top, games) {
         `;
 
         optionsDiv.querySelector('#playBtn').addEventListener("click", () => {
-            window.location.href = "game.html";
+            window.location.href = "dashboard/dash.html";
             const state = JSON.parse(localStorage.getItem("gameState"));
             state.level = 0 // FOR NOW HARD CODED TO LVL 0 </////////////////////
             localStorage.setItem("gameState", JSON.stringify(state))
