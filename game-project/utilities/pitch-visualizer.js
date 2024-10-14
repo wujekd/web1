@@ -21,8 +21,8 @@ export default class PitchVisualizer {
     }
     dashboardMode(){
  
-            this.canvas.width = 600;
-            this.canvas.height = 200;
+            this.canvas.width = 700;
+            this.canvas.height = 180;
             this.canvasHeight = this.canvas.height;
             this.canvasWidth = this.canvas.width;
     }
