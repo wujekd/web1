@@ -1,7 +1,7 @@
-import state from "../utilities/state.js"
+import {state} from "../utilities/state.js"
 
-function pullGames(){
-    return JSON.parse(localStorage.getItem("history"));
+export function pullGames(){
+    return JSON.parse(localStorage.getItem("games"));
 }
 
 export function getUsersGames(){
