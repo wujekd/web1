@@ -12,6 +12,7 @@ export const displayComponent = {
 
     gameSelected: (game)=>{
         const infoDash = document.querySelector(".infoDash");
+        infoDash.innerHTML = "";
         const template = document.getElementById("gameInfoTemplate");
         console.log(template)
         let div = template.content.cloneNode(true).firstElementChild
@@ -30,6 +31,21 @@ export const displayComponent = {
 
     levelSelected: (level) => {
         const infoDash = document.querySelector(".infoDash");
-        infoDash.innerHTML = JSON.stringify(level);
+        infoDash.innerHTML = ""
+        const template = document.getElementById("levelInfoTemplate");
+        const div = template.content.cloneNode(true).firstElementChild;
+        
+
+        const nameInfo = div.querySelector("#name")
+        const tempoInfo = div.querySelector("#tempo");
+        const descriptionInfo = div.querySelector("#description");
+        const playLevelBtn = div.querySelector("#play")
+
+        nameInfo.innerHTML = level.name;
+        tempoInfo.innerHTML = level.tempo,toString();
+        descriptionInfo.innerHTML = level.info;
+        playLevelBtn.innerHTML = `Play level ${ level.name }`
+
+        infoDash.appendChild(div);
     }
 }
