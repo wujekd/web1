@@ -11,11 +11,25 @@ export const displayComponent = {
     },
 
     gameSelected: (game)=>{
-        console.log(game);
+        const infoDash = document.querySelector(".infoDash");
+        const template = document.getElementById("gameInfoTemplate");
+        console.log(template)
+        let div = template.content.cloneNode(true).firstElementChild
+
+        const levelInfo = div.querySelector("#levelInfo");
+        const dateInfo = div.querySelector("#dateInfo");
+        const scoreInfo = div.querySelector("#scoreInfo");
+
+        levelInfo.innerHTML = `LEVEL: ${ game.level }`
+        dateInfo.innerHTML = `date: ${ game.date }`
+        scoreInfo.innerHTML = `overall score: ${ game.overallScore }`
+
+        infoDash.appendChild(div);
     },
 
 
     levelSelected: (level) => {
-        console.log(level)
+        const infoDash = document.querySelector(".infoDash");
+        infoDash.innerHTML = JSON.stringify(level);
     }
 }
