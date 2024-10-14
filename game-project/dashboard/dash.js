@@ -41,11 +41,24 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
         drawNextPoint();
     }
+
     animatePathDrawing(roundData, visualiser, 10);
 
 
     visualiser.setTarget(targetMelody);
     visualiser.drawTarget();
+
+
+
+
+    // function setgame(){
+    //     const games = JSON.parse(localStorage.getItem("games"));
+    //     games[0].level = 2;
+    //     localStorage.setItem("games", JSON.stringify(games))
+
+    // }
+
+    // setgame();
 
 
 })

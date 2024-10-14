@@ -1,6 +1,7 @@
 
     const levels = [
         {
+            id: 1,
             name: "Keep Steady!",
             description: "Just a C# arpeggio...",
             points: 45,
@@ -9,6 +10,7 @@
             tempo: 99
         },
         {
+            id: 2,
             name: "A Minor Fall",
             description: "A simple challenge for maintaining steady pitch.",
             points: 45,
@@ -20,10 +22,12 @@
             tempo: 99
         },
         {
+            id: 3,
             name: "A Major Lift",
             description: "Puts a smile on your F - A - C - E",
             points: 45,
             levelMelody: [
+                
             ],
             tempo: 99
         },
