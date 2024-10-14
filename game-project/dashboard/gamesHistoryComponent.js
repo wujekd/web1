@@ -30,5 +30,3 @@ export const gamesHistoryComponent = {
         });
     }
 };
-
-gamesHistoryComponent.render();
