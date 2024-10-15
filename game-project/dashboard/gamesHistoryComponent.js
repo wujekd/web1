@@ -2,9 +2,12 @@ import { pubsub } from "../utilities/pubsub.js";
 import { getUserGames } from "../utilities/gamesHistory.js";
 
 export const gamesHistoryComponent = {
-    games: getUserGames(),
+    games: {},
 
     render: () => {
+
+        gamesHistoryComponent.games = getUserGames();
+
         const element = document.querySelector(".gamesHistory");
         // element.innerHTML = "";
 

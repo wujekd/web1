@@ -1,3 +1,6 @@
+import {state} from "../utilities/state.js"
+
+
 export function saveGame(user, level, overallScore, noteScores, scoreArray) {
     const games = JSON.parse(localStorage.getItem('games')) || [];
 
@@ -18,7 +21,8 @@ export function getGames() {
     return JSON.parse(localStorage.getItem('games')) || [];
 }
 
-export function getUserGames(user) {
+export function getUserGames(){
+    const user = state.getLogged()
     const games = getGames();
-    return games.filter(game => game.user === user);
+    return games.filter(game => game.player === user);
 }
