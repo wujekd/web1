@@ -1,5 +1,4 @@
 const menuElement = document.querySelector(".menu");
-
 import { state } from "./utilities/state.js";
 
 function renderMenu(logged, top, games) {
@@ -8,6 +7,7 @@ function renderMenu(logged, top, games) {
 
     
     if (logged) {
+        
         infoDiv.innerHTML = `<h3>Welcome ${state.getLogged()}!</h3>`;
         optionsDiv.innerHTML = `
             <button class="menu-btn" id="playBtn">Play</button>
@@ -17,9 +17,6 @@ function renderMenu(logged, top, games) {
 
         optionsDiv.querySelector('#playBtn').addEventListener("click", () => {
             window.location.href = "dashboard/dash.html";
-            const state = JSON.parse(localStorage.getItem("gameState"));
-            state.level = 0 // FOR NOW HARD CODED TO LVL 0 </////////////////////
-            localStorage.setItem("gameState", JSON.stringify(state))
         });
 
         optionsDiv.querySelector('#scoresBtn').addEventListener("click", () => {
@@ -32,6 +29,7 @@ function renderMenu(logged, top, games) {
         });
 
     } else {
+
         infoDiv.innerHTML = `<h3>Welcome!</h3><p>You need to log in to play.</p>`;
         optionsDiv.innerHTML = `
             <button class="menu-btn" id="registerBtn">Register</button>

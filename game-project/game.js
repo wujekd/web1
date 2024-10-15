@@ -28,7 +28,8 @@ const visualizer = new PitchVisualizer('pitch-canvas', audioPlayer1.length);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioAnalyser = new AudioAnalyser(audioContext);
 
-if (!state.getLogged()){ window.location.href = 'index.html'}
+const logged = state.getLogged();
+if (!logged){ window.location.href = 'index.html'}
 
 const level = state.getCurrentLevel();
 // console.log(level);

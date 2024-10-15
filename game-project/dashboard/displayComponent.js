@@ -12,10 +12,10 @@ export const displayComponent = {
         pubsub.subscribe('gameSelected', displayComponent.gameSelected);
         pubsub.subscribe('levelSelected', displayComponent.levelSelected);
 
-
         displayComponent.visualiser = visualiser
     },
 
+    
     gameSelected: (game)=>{
         const infoDash = document.querySelector(".infoDash");
         infoDash.innerHTML = "";
@@ -51,6 +51,7 @@ export const displayComponent = {
         const descriptionInfo = div.querySelector("#description");
         const playLevelBtn = div.querySelector("#play")
 
+
         nameInfo.innerHTML = level.name;
         tempoInfo.innerHTML = level.tempo,toString();
         descriptionInfo.innerHTML = level.info;
@@ -61,8 +62,12 @@ export const displayComponent = {
         })
 
         infoDash.appendChild(div);
-    },
 
+        displayComponent.visualiser.clear();
+
+        displayComponent.visualiser.setTarget(lvlsComponent.lvList[level.id-1].levelMelody);
+        displayComponent.visualiser.drawTarget();
+    },
 
 
     animatePathDrawing: (roundData, visualiser, interval = 30) => {

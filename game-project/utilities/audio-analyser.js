@@ -35,7 +35,7 @@ export default class AudioAnalyser {
             this.playerGain.connect(this.mixer1)
             this.micGain.connect(this.mixer1)
 
-            // this.player1source.connect(this.audioContext.destination)
+            this.player1source.connect(this.audioContext.destination) //\THHHHHHIIISAAAA
 
             // Create the script processor node for real-time audio processing
             this.scriptProcessorNode = this.audioContext.createScriptProcessor(2048, 1, 1);
