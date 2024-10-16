@@ -20,10 +20,10 @@
         <div class="dash">
             <div class="leftContainer">
                 <div class="dashDisplay">
-                    <h2></h2>
-                    <canvas id="pitch-canvas" width="300" height="400"></canvas>
-                    <div class="infoDash">
-
+                    <div>
+                        <canvas id="pitch-canvas" width="300" height="400"></canvas>
+                        <div class="infoDash">
+                        </div>
                     </div>
                 </div>
                 <div class="leveList">
@@ -37,6 +37,12 @@
         </div>
     </main>
 
+    <template id="userInfoTemplate">
+        <div>
+            <h3>Hello, <span id="userName"></span></h3>
+            <h3>Games played: <span id="gameCount"></span></h3>
+        </div>
+    </template>
     <template id="gameInfoTemplate">
         <div class="gameInfo">
             <div class="gameInfo">
@@ -55,6 +61,7 @@
             
         </div>
     </template>
+
     <!-- <audio id="clickPlayer" src="./levels/lvl2/click_lvl2.mp3"></audio> -->
     <script type="module" src="./dash.js" defer></script>
 </body>

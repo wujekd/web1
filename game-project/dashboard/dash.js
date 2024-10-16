@@ -6,12 +6,12 @@ import { displayComponent } from "./displayComponent.js";
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
-    const visualiser = new PitchVisualizer("pitch-canvas", 3, true);
+    
 
 
     lvlsComponent.render();
     gamesHistoryComponent.render();
-    displayComponent.init(visualiser);
+    displayComponent.init();
     
 
     function setgame(){

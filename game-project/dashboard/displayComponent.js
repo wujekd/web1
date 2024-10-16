@@ -1,24 +1,39 @@
+import PitchVisualizer from "../utilities/pitch-visualizer.js";
 import { pubsub } from "../utilities/pubsub.js";
 import { state } from "../utilities/state.js";
 import { lvlsComponent } from "./lvlsComponent.js";
+import { gamesHistoryComponent } from "./gamesHistoryComponent.js";
+
 
 export const displayComponent = {
-    visualiser: {},
 
-    init: (visualiser)=>{
-        const infoDash = document.querySelector(".infoDash");
-        infoDash.innerHTML = "<h1>Select a level or a past game to see more details..."
+    visualiser: {},
+    infoDash: document.querySelector(".infoDash"),
+    logged: state.getLogged(),
+
+    init: ()=>{
 
         pubsub.subscribe('gameSelected', displayComponent.gameSelected);
         pubsub.subscribe('levelSelected', displayComponent.levelSelected);
 
-        displayComponent.visualiser = visualiser
+        displayComponent.visualiser = new PitchVisualizer("pitch-canvas", 3, true);
+
+        displayComponent.showAccount();
     },
 
+    showAccount: ()=> {
+        const template = document.querySelector('#userInfoTemplate');
+        const div = template.content.cloneNode(true).firstElementChild;
+        const gameCount = gamesHistoryComponent.games.length;
     
+        div.querySelector('#userName').textContent = displayComponent.logged;
+        div.querySelector('#gameCount').textContent = gameCount;
+    
+        displayComponent.infoDash.append(div);
+    },
+  
     gameSelected: (game)=>{
-        const infoDash = document.querySelector(".infoDash");
-        infoDash.innerHTML = "";
+        displayComponent.infoDash.innerHTML = "";
         const template = document.getElementById("gameInfoTemplate");
         let div = template.content.cloneNode(true).firstElementChild
 
@@ -30,7 +45,7 @@ export const displayComponent = {
         dateInfo.innerHTML = `date: ${ game.date }`
         scoreInfo.innerHTML = `overall score: ${ game.overallScore }`
 
-        infoDash.appendChild(div);
+        displayComponent.infoDash.appendChild(div);
 
         displayComponent.visualiser.clear();
         displayComponent.visualiser.setTarget(lvlsComponent.lvList[game.level-1].levelMelody);
@@ -40,17 +55,15 @@ export const displayComponent = {
 
 
     levelSelected: (level) => {
-        const infoDash = document.querySelector(".infoDash");
-        infoDash.innerHTML = ""
+        displayComponent.infoDash.innerHTML = ""
         const template = document.getElementById("levelInfoTemplate");
+
         const div = template.content.cloneNode(true).firstElementChild;
         
-
         const nameInfo = div.querySelector("#name")
         const tempoInfo = div.querySelector("#tempo");
         const descriptionInfo = div.querySelector("#description");
         const playLevelBtn = div.querySelector("#play")
-
 
         nameInfo.innerHTML = level.name;
         tempoInfo.innerHTML = level.tempo,toString();
@@ -61,10 +74,9 @@ export const displayComponent = {
             setTimeout(()=>{window.location.replace("../game.html")}, 10)
         })
 
-        infoDash.appendChild(div);
+        displayComponent.infoDash.appendChild(div);
 
         displayComponent.visualiser.clear();
-
         displayComponent.visualiser.setTarget(lvlsComponent.lvList[level.id-1].levelMelody);
         displayComponent.visualiser.drawTarget();
     },
@@ -82,7 +94,6 @@ export const displayComponent = {
                 setTimeout(drawNextPoint, interval);
             }
         }
-    
         drawNextPoint();
     }
 }

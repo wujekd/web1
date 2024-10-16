@@ -29,9 +29,8 @@ h1 {
 }
 
 canvas {
-    border: 1px solid black;
+    border: 1px solid rgb(134, 43, 43);
     margin-top: 20px;
-    /* height: 900; */
 }
 
 #start-btn {
@@ -424,11 +423,12 @@ main {
     height: 50%;
 }
 
-.gamesHistory, .leveList, .dashDisplay {
+.gamesHistory, .leveList{
     display: flex;
     flex-direction: column;
 }
 .gamesHistory{
     overflow-y: scroll;
     max-height: 97%;
+    min-width: 12rem;
 }
