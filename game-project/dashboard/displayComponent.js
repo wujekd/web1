@@ -16,6 +16,8 @@ export const displayComponent = {
         pubsub.subscribe('gameSelected', displayComponent.gameSelected);
         pubsub.subscribe('levelSelected', displayComponent.levelSelected);
 
+        document.querySelector(".showAccountBtn").addEventListener("click", displayComponent.showAccount)
+
         displayComponent.visualiser = new PitchVisualizer("pitch-canvas", 3, true);
 
         displayComponent.showAccount();
@@ -25,10 +27,16 @@ export const displayComponent = {
         const template = document.querySelector('#userInfoTemplate');
         const div = template.content.cloneNode(true).firstElementChild;
         const gameCount = gamesHistoryComponent.games.length;
+
+        console.log("logged: ", displayComponent.logged);
+        console.log("gamecount: ", gameCount);
+
     
         div.querySelector('#userName').textContent = displayComponent.logged;
         div.querySelector('#gameCount').textContent = gameCount;
     
+
+        displayComponent.infoDash.innerHTML = "";
         displayComponent.infoDash.append(div);
     },
   
