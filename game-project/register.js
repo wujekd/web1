@@ -190,12 +190,14 @@ const audioPlayer1 = document.getElementById('player1');
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 
-const audioAnalyser = new AudioAnalyser(audioContext);
+
+const regAudioAnalyser = new regAudio(audioContext, volumeBar);
 
 
-audioAnalyser.init()
 
-updateMeter(audioAnalyser, volumeBar);
+regAudioAnalyser.init()
+
+// updateMeter(audioAnalyser, volumeBar);
 
 
 

@@ -23,7 +23,7 @@
         <div id="chart_div" style="width: 400px; height: 120px; position: absolute; top: -105px; z-index: -3"></div>
         <div class="regLoadingBar borderMain" style="color: black; display: flex; justify-content: center; align-items: center; font-size: 1.6rem;">
             <p style="position: absolute;">CREATE AN ACCOUNT</p>
-                <div id="volume-bar" style="height: 100%; width: 30%; background-color: green;"></div>
+                <div id="volume-bar" style="height: 100%; width: 30%; background-color: rgba(9, 61, 9, 0.643);"></div>
         </div>
         <div class="regAlert borderMain">
             <p id="username-length-alert" class="">Username needs at least 5 characters</p>
@@ -47,11 +47,11 @@
     </form>
     <div id="message"></div>
 
-    <footer> <div id="volume-meter" style="margin: 5px; width: 280px; height: 30px; background-color: lightgray;">
-        <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
-    </div></footer>
+    <footer>
+        <audio src="./levels/beat with no guitar.mp3" controls id="player1"></audio>
+    </footer>
     
-    <audio src="./levels/beat with no guitar.mp3" controls id="player1"></audio>
+    
 
     <script src="register.js" type="module" defer></script>
 </body>
