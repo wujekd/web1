@@ -9,6 +9,10 @@ import { saveGame } from './utilities/gamesHistory.js';
 import { showScore } from './utilities/splashScreens.js';
 import { pitchDisplayRefresh } from './utilities/pitchDisplayRefresh.js';
 
+
+const logged = state.getLogged();
+if (!logged){ window.location.href = 'index.html'}
+
 const volumeBar = document.getElementById('volume-bar');
 const scoreSplash = document.getElementById("scoreSplash");
 const scoreSplashDisplay = document.getElementById("scoreSplashDisplay");
@@ -28,11 +32,11 @@ const visualizer = new PitchVisualizer('pitch-canvas', audioPlayer1.length);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioAnalyser = new AudioAnalyser(audioContext);
 
-const logged = state.getLogged();
-if (!logged){ window.location.href = 'index.html'}
+
+
+
 
 const level = state.getCurrentLevel();
-// console.log(level);
 const levelData = state.getCurrentLevel();
 const levelMelody = levelData.levelMelody;
 
