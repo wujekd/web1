@@ -103,8 +103,10 @@ function roundEnded(score, noteScores, scoreArray){
     }
     roundCount++;
 
-    if (roundCount > 2){
-        saveGame(state.getLogged, level.id, score, noteScores, scoreArray);
+    // if (roundCount > 2){
+    if (true){
+        // console.log(state.getLogged());
+        saveGame(state.getLogged(), level.id, score, noteScores, scoreArray);
         showRoundResult()
 
     } else {
