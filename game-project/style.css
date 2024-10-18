@@ -474,3 +474,10 @@ footer {
     width: 100%;
     background-color: #1194c07c;
 }
+.historyMenu {
+    display: flex;
+}
+.historyMenu button {
+    width: 50%;
+    height: 2.4rem;
+}
