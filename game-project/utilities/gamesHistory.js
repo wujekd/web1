@@ -24,5 +24,5 @@ export function getGames() {
 export function getUserGames(){
     const user = state.getLogged()
     const games = getGames();
-    return games.filter(game => game.player === user);
+    return games.filter(game => game.user === user);
 }
