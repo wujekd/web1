@@ -18,6 +18,7 @@ export const gamesHistoryComponent = {
         scoreTableBtn.addEventListener("click", gamesHistoryComponent.showScoreTable);
 
     },
+    
 
     showUserGames: ()=>{
         const element = document.querySelector(".gamesHistory");
@@ -44,6 +45,7 @@ export const gamesHistoryComponent = {
         });
     },
 
+
     showScoreTable: ()=>{
         const element = document.querySelector(".gamesHistory");
         element.innerHTML = "";
@@ -55,9 +57,9 @@ export const gamesHistoryComponent = {
             
             gameButton.innerHTML = `
                 <div class="gameInfo">
-                    <h3>Level: ${game.level}</h3>
+                    <h3>Score: ${game.overallScore}</h3>
                     <p>Date: ${new Date(game.date).toLocaleDateString()}</p>
-                    <p>Score: ${game.overallScore}</p>
+                    <p>Level: ${game.level}</p>
                 </div>
             `;
             gameButton.addEventListener("click", () => {
@@ -71,6 +73,6 @@ export const gamesHistoryComponent = {
 
 
     select: (index)=>{
-        pubsub.publish("gameSelected", gamesHistoryComponent.games[index]);
+        pubsub.publish("gameSelected", gamesHistoryComponent.allGames[index]);
     }
 };
