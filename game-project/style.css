@@ -481,3 +481,8 @@ footer {
     width: 50%;
     height: 2.4rem;
 }
+
+.historyLvlBtn {
+    padding: 5px;
+    margin: 4px;
+}

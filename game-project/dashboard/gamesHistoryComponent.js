@@ -1,9 +1,11 @@
 import { pubsub } from "../utilities/pubsub.js";
 import { getGames, getUserGames } from "../utilities/gamesHistory.js";
+import { lvlsComponent } from "./lvlsComponent.js";
 
 export const gamesHistoryComponent = {
     games: {},
     allGames: getGames(),
+
 
     render: () => {
 
@@ -17,8 +19,20 @@ export const gamesHistoryComponent = {
         yourGamesBtn.addEventListener("click", gamesHistoryComponent.showUserGames);
         scoreTableBtn.addEventListener("click", gamesHistoryComponent.showScoreTable);
 
+
+        const historyLevelsDiv = document.querySelector(".historyLevels");
+        lvlsComponent.lvList.forEach((lvl, index)=>{
+                                                    const btn = document.createElement("button")
+                                                    btn.textContent = `${lvl.id}`
+                                                    btn.classList.add("historyLvlBtn")
+                                                    btn.addEventListener("click", ()=>{ console.log(`hey ${lvl.id}`)})
+                                                    historyLevelsDiv.appendChild(btn)
+        })
+
+
+
     },
-    
+
 
     showUserGames: ()=>{
         const element = document.querySelector(".gamesHistory");
