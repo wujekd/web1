@@ -10,20 +10,39 @@ export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelo
     function collectAudioData() {
         const currentTime = audioPlayer1.currentTime;
         audioAnalyser.analyser.getFloatTimeDomainData(audioAnalyser.dataArray);
-
+    
         const pitch = audioAnalyser.autoCorrelate(audioAnalyser.dataArray, audioAnalyser.audioContext.sampleRate);
-        if (pitch !== -1 && currentTime !== lastTime) {
-            const roundedPitch = Number(pitch.toFixed(2)); 
+        
+        // Always push a value, even if no pitch is detected
+        if (currentTime !== lastTime) {
+            const roundedPitch = pitch !== -1 ? Number(pitch.toFixed(2)) : 0; // Use 0 as placeholder for no pitch
             scoreArray.push({ time: currentTime, pitch: roundedPitch });
-            lastTime = currentTime; 
+            lastTime = currentTime;
         }
-
+    
         visualizer.update(pitch, currentTime);
-
+    
         if (!audioPlayer1.paused && !audioPlayer1.ended) {
             requestAnimationFrame(collectAudioData);
         }
     }
+    // function collectAudioData() {
+    //     const currentTime = audioPlayer1.currentTime;
+    //     audioAnalyser.analyser.getFloatTimeDomainData(audioAnalyser.dataArray);
+
+    //     const pitch = audioAnalyser.autoCorrelate(audioAnalyser.dataArray, audioAnalyser.audioContext.sampleRate);
+    //     if (pitch !== -1 && currentTime !== lastTime) {
+    //         const roundedPitch = Number(pitch.toFixed(2)); 
+    //         scoreArray.push({ time: currentTime, pitch: roundedPitch });
+    //         lastTime = currentTime; 
+    //     }
+
+    //     visualizer.update(pitch, currentTime);
+
+    //     if (!audioPlayer1.paused && !audioPlayer1.ended) {
+    //         requestAnimationFrame(collectAudioData);
+    //     }
+    // }
 
     const playListener = () => {
         requestAnimationFrame(collectAudioData);
@@ -54,13 +73,23 @@ function addScore(scoreData, levelMelody) {
 
         if (matchingNotes.length > 0) {
             let noteScore = 0;
+            // matchingNotes.forEach(point => {
+            //     const pitchDifference = Math.abs(point.pitch - targetNote.frequency);
+            //     const maxScorePerNote = 100;
+            //     const score = Math.max(0, maxScorePerNote - pitchDifference);
+            //     noteScore += score;
+            // });
+
             matchingNotes.forEach(point => {
-                const pitchDifference = Math.abs(point.pitch - targetNote.frequency);
-                const maxScorePerNote = 100;
-                const score = Math.max(0, maxScorePerNote - pitchDifference);
+                let score = 0;
+                if (point.pitch > 0) {  // Only calculate score for non-silent periods
+                    const pitchDifference = Math.abs(point.pitch - targetNote.frequency);
+                    const maxScorePerNote = 100;
+                    score = Math.max(0, maxScorePerNote - pitchDifference);
+                }
                 noteScore += score;
             });
-
+            
             const averageNoteScore = noteScore / matchingNotes.length;
             totalScore += averageNoteScore;
             notesEvaluated++;
