@@ -37,14 +37,35 @@ export const gamesHistoryComponent = {
             btn.addEventListener("click", ()=> gamesHistoryComponent.sortGamesBy(Number(btn.textContent)))
         })
 
-      
+
+        const sortLvlBtn = document.getElementById("sortLvl");
 
 
-      
+        function expandHistoryLevels() {
+            historyLevelsDiv.style.maxHeight = "500px";
+            historyLevelsDiv.style.overflow = "visible"; }
+
+        function collapseHistoryLevels() {
+            historyLevelsDiv.style.maxHeight = "0";
+            historyLevelsDiv.style.overflow = "hidden";
+        }
+
+        sortLvlBtn.addEventListener("mouseover", expandHistoryLevels);
+
+        historyLevelsDiv.addEventListener("mouseover", expandHistoryLevels);
+
+        sortLvlBtn.addEventListener("mouseout", (event) => {
+            if (!historyLevelsDiv.matches(":hover")) {
+                collapseHistoryLevels();
+            }
+        });
+
+        historyLevelsDiv.addEventListener("mouseout", (event) => {
+            if (!sortLvlBtn.matches(":hover")) {
+                collapseHistoryLevels();
+            }
+        });
         
-
-
-
     },
 
 
@@ -76,7 +97,6 @@ export const gamesHistoryComponent = {
 
 
     showScoreTable: ()=>{
-        console.log("show score table ")
         gamesHistoryComponent.displaying = "scoreTable"
         const element = document.querySelector(".gamesHistory");
         element.innerHTML = "";
@@ -110,7 +130,6 @@ export const gamesHistoryComponent = {
     sortGamesBy: (what) => {
 
         if (gamesHistoryComponent.displaying == "userGames") {
-            console.log('testy')
             gamesHistoryComponent.games.sort((a, b) => {
                 if (what == "date") {
                     return new Date(a.date).getTime() - new Date(b.date).getTime(); 
