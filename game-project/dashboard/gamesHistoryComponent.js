@@ -65,7 +65,7 @@ export const gamesHistoryComponent = {
                 collapseHistoryLevels();
             }
         });
-        
+
     },
 
 
@@ -88,7 +88,7 @@ export const gamesHistoryComponent = {
             `;
             gameButton.addEventListener("click", () => {
                 
-                gamesHistoryComponent.select(index);
+                gamesHistoryComponent.select(game);
             });
             element.appendChild(gameButton); 
             
@@ -122,8 +122,9 @@ export const gamesHistoryComponent = {
         });
     },
 
-    select: (index)=>{
-        pubsub.publish("gameSelected", gamesHistoryComponent.allGames[index]);
+    
+    select: (game)=>{
+        pubsub.publish("gameSelected", game);
     },
 
 
