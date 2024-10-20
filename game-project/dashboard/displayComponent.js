@@ -59,6 +59,9 @@ export const displayComponent = {
         displayComponent.visualiser.setTarget(lvlsComponent.lvList[game.level-1].levelMelody);
         displayComponent.visualiser.drawTarget();
         displayComponent.animatePathDrawing(game.scoreArray, displayComponent.visualiser, 10);
+
+        const scoreBar = document.getElementById("scoreBar");
+        scoreBar.style.height = `${game.overallScore}%`
     },
 
 
