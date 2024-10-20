@@ -160,11 +160,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     }
 
+
+    const reels = document.querySelector(".registration").querySelectorAll("img")
+    console.log(reels)
     const regAlert = document.querySelector(".regAlert")
     const regStartBtn = document.getElementById("regStartBtn");
     regStartBtn.addEventListener("click", ()=> {
                                                 regAlert.classList.add("down");
                                                 regStartBtn.classList.add("hidden");
+                                                reels.forEach((reel)=>{ 
+                                                    reel.style.animation = "spin 3s linear infinite";
+                                                })
+                                                audioPlayer1.play();
+
                                             })
 
 
