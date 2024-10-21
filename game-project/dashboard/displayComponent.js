@@ -21,6 +21,12 @@ export const displayComponent = {
         displayComponent.visualiser = new PitchVisualizer("pitch-canvas", 3, true);
 
         displayComponent.showAccount();
+
+
+
+
+
+
     },
 
     showAccount: ()=> {
@@ -42,14 +48,22 @@ export const displayComponent = {
   
     gameSelected: (game)=>{
         displayComponent.infoDash.innerHTML = "";
-        const template = document.getElementById("gameInfoTemplate");
+        const template = document.getElementById("gameDetailsTemplate");
         let div = template.content.cloneNode(true).firstElementChild
+        const metersDiv = document.createElement('div');
+        metersDiv.innerHTML = `
+<div id="chart_div"></div>
+<div id="scoreMeter" style="margin: 5px; width: 30px; height: 150px; background-color: lightgray; position: relative;">
+    <div id="scoreBar" style="width: 100%; height: 10%; background-color: green; position: absolute; bottom: 0;"></div>
+</div>`
+        metersDiv.classList.add("metersDiv")
+        div.appendChild(metersDiv);
 
         const levelInfo = div.querySelector("#levelInfo");
         const dateInfo = div.querySelector("#dateInfo");
         const scoreInfo = div.querySelector("#scoreInfo");
 
-        levelInfo.innerHTML = `LEVEL: ${ game.level }`
+        levelInfo.innerHTML = `<p>LEVEL: ${ game.level }</p>`
         dateInfo.innerHTML = `date: ${ game.date }`
         scoreInfo.innerHTML = `overall score: ${ game.overallScore }`
 
@@ -62,6 +76,35 @@ export const displayComponent = {
 
         const scoreBar = document.getElementById("scoreBar");
         scoreBar.style.height = `${game.overallScore}%`
+
+
+
+
+
+        google.charts.load('current', {'packages':['gauge']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+            ['', 'Value'],
+            ['Score', 0],
+            ]);
+
+            var options = {
+            width: 160, height: 160,
+            redFrom: 90, redTo: 100,
+            yellowFrom:75, yellowTo: 90,
+            minorTicks: 10
+            };
+
+            var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+            data.setValue(0, 1, game.overallScore);
+            chart.draw(data, options);
+
+        }
     },
 
 

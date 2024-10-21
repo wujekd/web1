@@ -423,7 +423,7 @@ pitch-canvas{
 
 .showAccountBtn{
     position: absolute;
-    top: 10px;
+    top: -2px;
     left: 10px;
 }
 
@@ -463,8 +463,18 @@ pitch-canvas{
 
     border: 3px solid #041308;
 }
+.metersDiv{
+    display: flex;
+}
+.infoDash{
+    display: flex;
+    width: 100%;
+}
+.gameDetails{
+    display: flex;
+    align-items: center;
+}
 .gameInfo{
-
     border: 3px solid #041308;
 }
 
@@ -485,4 +495,55 @@ footer {
 .historyLvlBtn {
     padding: 5px;
     margin: 4px;
+}
+
+
+.historyLevels {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out; /* Smooth transition */
+}
+
+#scoreBar {
+    transition: height 0.9s ease-in-out;
+}
+
+.registration img{
+    z-index: -34;
+    height: 8rem;
+    width: auto;
+    position: absolute;
+
+    /* animation: spin 3s linear infinite; */
+}
+#reel1{
+    left: -5rem;
+    top: 2rem;
+}
+#reel2{
+    right: -5rem;
+    top: 2rem;
+}
+#reel3{
+    left: -5rem;
+    bottom: 2rem;
+}
+#reel4{
+    right: -5rem;
+    bottom: 2rem;
+}
+
+
+
+
+
+
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg); /* Start at 0 degrees */
+    }
+    to {
+        transform: rotate(360deg); /* Rotate a full circle */
+    }
 }
