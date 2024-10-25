@@ -11,6 +11,7 @@ export const displayComponent = {
     infoDash: document.querySelector(".infoDash"),
     logged: state.getLogged(),
 
+
     init: ()=>{
 
         pubsub.subscribe('gameSelected', displayComponent.gameSelected);
@@ -22,12 +23,8 @@ export const displayComponent = {
 
         displayComponent.showAccount();
 
-
-
-
-
-
     },
+
 
     showAccount: ()=> {
         const template = document.querySelector('#userInfoTemplate');
@@ -46,6 +43,9 @@ export const displayComponent = {
         displayComponent.infoDash.append(div);
     },
   
+
+
+    lastMeterValue: 0,
     gameSelected: (game)=>{
         displayComponent.infoDash.innerHTML = "";
         const template = document.getElementById("gameDetailsTemplate");
@@ -54,7 +54,7 @@ export const displayComponent = {
         metersDiv.innerHTML = `
 <div id="chart_div"></div>
 <div id="scoreMeter" style="margin: 5px; width: 30px; height: 150px; background-color: lightgray; position: relative;">
-    <div id="scoreBar" style="width: 100%; height: 10%; background-color: green; position: absolute; bottom: 0;"></div>
+    <div id="scoreBar" style="width: 100%; height: ${displayComponent.lastMeterValue}%; background-color: green; position: absolute; bottom: 0;"></div>
 </div>`
         metersDiv.classList.add("metersDiv")
         div.appendChild(metersDiv);
@@ -78,9 +78,6 @@ export const displayComponent = {
         scoreBar.style.height = `${game.overallScore}%`
 
 
-
-
-
         google.charts.load('current', {'packages':['gauge']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -88,7 +85,7 @@ export const displayComponent = {
 
             var data = google.visualization.arrayToDataTable([
             ['', 'Value'],
-            ['Score', 0],
+            ['Score', displayComponent.lastMeterValue],
             ]);
 
             var options = {
@@ -103,6 +100,8 @@ export const displayComponent = {
             chart.draw(data, options);
             data.setValue(0, 1, game.overallScore);
             chart.draw(data, options);
+
+            displayComponent.lastMeterValue = parseInt(game.overallScore);
 
         }
     },
