@@ -91,7 +91,6 @@ export const gamesHistoryComponent = {
                 gamesHistoryComponent.select(game);
             });
             element.appendChild(gameButton); 
-            
         });
     },
 
@@ -115,7 +114,7 @@ export const gamesHistoryComponent = {
             `;
             gameButton.addEventListener("click", () => {
                 
-                gamesHistoryComponent.select(index);
+                gamesHistoryComponent.select(game);
             });
             element.appendChild(gameButton); 
             
@@ -123,7 +122,7 @@ export const gamesHistoryComponent = {
     },
 
     
-    select: (game)=>{
+    select: (game) => {
         pubsub.publish("gameSelected", game);
     },
 
@@ -142,6 +141,7 @@ export const gamesHistoryComponent = {
                 }
                 return 0;
             });
+
             gamesHistoryComponent.showUserGames();
             gamesHistoryComponent.games = getUserGames();
 
