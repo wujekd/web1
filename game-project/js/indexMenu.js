@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             `;
 
             optionsDiv.querySelector('#playBtn').addEventListener("click", () => {
-                window.location.href = "dashboard/dash.html";
+                window.location.href = "dash.html";
             });
 
             optionsDiv.querySelector('#scoresBtn').addEventListener("click", () => {

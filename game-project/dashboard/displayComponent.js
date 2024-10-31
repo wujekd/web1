@@ -124,7 +124,7 @@ export const displayComponent = {
         playLevelBtn.innerHTML = `Play level ${ level.name }`
         playLevelBtn.addEventListener("click", ()=>{
             state.setLevelState(level.id)
-            setTimeout(()=>{window.location.replace("../game.html")}, 10)
+            setTimeout(()=>{window.location.replace("game.html")}, 10)
         })
 
         displayComponent.infoDash.appendChild(div);

@@ -4,6 +4,10 @@ scoreTableBtn.addEventListener("click", ()=>{
     goToScoreTable();
 })
 }
+export function resetViewSetting(){
+    const setting = {view : ""}
+    localStorage.setItem("viewSetting", JSON.stringify(setting))
+}
 
 const goToScoreTable =  function(){
     //set score table to be selected
@@ -16,7 +20,7 @@ const goToScoreTable =  function(){
     localStorage.setItem("viewSetting", JSON.stringify(viewSetting));
 
     //reroute to the dashboard
-    document.location.href = "./dashboard/dash.html";
+    document.location.href = "./dash.html";
 
     //trigger the view in dashboard
 

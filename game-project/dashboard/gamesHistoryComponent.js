@@ -7,7 +7,6 @@ export const gamesHistoryComponent = {
     allGames: getGames(),
     displaying: "",
 
-
     render: () => {
 
         gamesHistoryComponent.showUserGames();
@@ -67,16 +66,32 @@ export const gamesHistoryComponent = {
 
     },
 
-    setNavbarHighlight: (btn)=>{
-        if(btn == "scoreTable"){
+    setNavbarHighlight: (btn) => {
+        const gameNavBarButton = document.getElementById("gameNavBarButton");
 
-        } else {
-            
+        const scoreTableNavBarButton = document.getElementById("scoreTableNavBarButton");
+        
+    
+        if (btn === "scoreTable") {
+            // Add activeMenu to scoreTable button and remove from game button
+            if (!scoreTableNavBarButton.classList.contains("activeMenu")) {
+                scoreTableNavBarButton.classList.add("activeMenu");
+            }
+            gameNavBarButton.classList.remove("activeMenu");
+        } else if (btn === "games") {
+            // Add activeMenu to game button and remove from scoreTable button
+            if (!gameNavBarButton.classList.contains("activeMenu")) {
+                gameNavBarButton.classList.add("activeMenu");
+            }
+            scoreTableNavBarButton.classList.remove("activeMenu");
         }
-    }
-
+    },
+    
 
     showUserGames: ()=>{
+
+        gamesHistoryComponent.setNavbarHighlight("games")
+
         gamesHistoryComponent.displaying = "userGames";
         const element = document.querySelector(".gamesHistory");
         element.innerHTML = "";
@@ -103,6 +118,9 @@ export const gamesHistoryComponent = {
 
 
     showScoreTable: ()=>{
+        
+        gamesHistoryComponent.setNavbarHighlight("scoreTable")
+
         gamesHistoryComponent.displaying = "scoreTable"
         const element = document.querySelector(".gamesHistory");
         element.innerHTML = "";
