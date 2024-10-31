@@ -27,7 +27,7 @@ export const gamesHistoryComponent = {
             });
 
         const sortbyScoreBtn = document.getElementById("sortScore");
-        const historyLvlsBtnsDiv = document.getElementById("historyLevels");
+        // const historyLvlsBtnsDiv = document.getElementById("historyLevels");
         const sortByDateBtn = document.getElementById("sortDate");
         sortbyScoreBtn.addEventListener("click", ()=> gamesHistoryComponent.sortGamesBy("score"));
         sortByDateBtn.addEventListener("click", ()=> gamesHistoryComponent.sortGamesBy("date"));
@@ -51,7 +51,6 @@ export const gamesHistoryComponent = {
         }
 
         sortLvlBtn.addEventListener("mouseover", expandHistoryLevels);
-
         historyLevelsDiv.addEventListener("mouseover", expandHistoryLevels);
 
         sortLvlBtn.addEventListener("mouseout", (event) => {
@@ -132,12 +131,12 @@ export const gamesHistoryComponent = {
         if (gamesHistoryComponent.displaying == "userGames") {
             gamesHistoryComponent.games.sort((a, b) => {
                 if (what == "date") {
-                    return new Date(a.date).getTime() - new Date(b.date).getTime(); 
+                    return new Date(b.date).getTime() - new Date(a.date).getTime(); 
                 } else if (what == "score") {
-                    return a.overallScore - b.overallScore;
+                    return b.overallScore - a.overallScore;
                 } else if (typeof what == 'number') {
                     gamesHistoryComponent.games = gamesHistoryComponent.games.filter(game => game.level == what);
-                    return a.overallScore - b.overallScore;
+                    return b.overallScore - a.overallScore;
                 }
                 return 0;
             });
@@ -148,12 +147,12 @@ export const gamesHistoryComponent = {
         } else if (gamesHistoryComponent.displaying == "scoreTable"){
             gamesHistoryComponent.allGames.sort((a, b) => {
                 if (what == "date") {
-                    return new Date(a.date).getTime() - new Date(b.date).getTime(); 
+                    return new Date(b.date).getTime() - new Date(a.date).getTime(); 
                 } else if (what == "score") {
-                    return a.overallScore - b.overallScore;
+                    return b.overallScore - a.overallScore;
                 } else if (typeof what == 'number') {
                     gamesHistoryComponent.allGames = gamesHistoryComponent.allGames.filter(game => game.level == what);
-                    return a.overallScore - b.overallScore;
+                    return b.overallScore - a.overallScore;
                 }
                 return 0; 
             });

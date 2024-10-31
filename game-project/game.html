@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch Game</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-links">
-            <a href="index.html" class="nav-item">Home</a>
+            <a href="index.html" class="nav-item">Menu</a>
+            <a href="./dashboard/dash.html" class="nav-item activeMenu">Game</a>
             <a href="register.html" class="nav-item">Register</a>
             <a href="login.html" class="nav-item">Login</a>
             <a href="score-table.html" class="nav-item">Score Table</a>
@@ -24,9 +25,7 @@
                 <button id="muteAudio">Mute Audio</button>
                 <button id="unmuteMic">Unmute Mic</button>
                 <button id="unmuteAudio">Unmute Audio</button>
-                <div id="volume-meter" style="margin: 5px; width: 280px; height: 30px; background-color: lightgray;">
-                    <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
-                </div>
+               
             </div>
             <div class="cont bottomDisplay">
                 <div class="topSetion">
@@ -38,6 +37,9 @@
                         <h2 class="score1">-</h2>
                         <h2 class="score2">-</h2>
                         <h2 class="score3">-</h2>
+                    </div>
+                    <div id="volume-meter" style="margin: 5px; width: 280px; height: 30px; background-color: lightgray;">
+                        <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
                     </div>
 
                     <button id="start-btn">START ROUND 1</button>

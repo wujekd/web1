@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch Game</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <nav class="navbar">
         <div class="nav-links">
-            <a href="../index.html" class="nav-item">Home</a>
+            <a href="../index.html" class="nav-item">Menu</a>
+            <a href="./dash.html" class="nav-item activeMenu">Game</a>
+            <a id="scoreTableButton" class="nav-item">Score Table</a>
             <a href="../register.html" class="nav-item">Register</a>
             <a href="../login.html" class="nav-item">Login</a>
-            <a href="../score-table.html" class="nav-item">Score Table</a>
         </div>
     </nav>
     
     <main>
+
+        
         <div class="dash">
             <div class="leftContainer">
                 <div class="dashDisplay">
@@ -24,11 +28,6 @@
                         
                         <canvas id="pitch-canvas" width="300" height="400"></canvas>
                         <button class="showAccountBtn">go to your account</button>
-                       
-                        <div id="scoreMeter" style="margin: 5px; width: 30px; height: 280px; background-color: lightgray; position: relative;">
-                            <div id="scoreBar" style="width: 100%; height: 10%; background-color: green; position: absolute; bottom: 0;"></div>
-                        </div>
-                        
                             
                             <div class="infoDash">
     
@@ -37,6 +36,7 @@
                     </div>
                 </div>
                 <div class="leveList">
+                    
                     <h1>levels:</h1>
                 </div>
             </div>
@@ -70,14 +70,14 @@
             <h3>Games played: <span id="gameCount"></span></h3>
         </div>
     </template>
-    <template id="gameInfoTemplate">
-        <div class="gameInfo">
-            <div class="gameInfo">
-                <p id="levelInfo"></p>
-                <p id="dateInfo"></p>
-                <p id="scoreInfo"></p>
+    <template id="gameDetailsTemplate">
+            <div class="gameDetails">
+                <div>
+                    <p id="levelInfo"></p>
+                    <p id="dateInfo"></p>
+                    <p id="scoreInfo"></p>
+                </div>
             </div>
-        </div>
     </template>
     <template id="levelInfoTemplate">
         <div class="levelInfo">

@@ -22,7 +22,7 @@ export const state = {
             state.init();
             currentState = JSON.parse(localStorage.getItem('gameState'));
         }
-        return currentState.logged;
+        return currentState.logged.toString();
     },
     getCurrentLevel: ()=> {
         const gameState = JSON.parse(localStorage.getItem('gameState'))

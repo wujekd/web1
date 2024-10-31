@@ -26,6 +26,7 @@ export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelo
             requestAnimationFrame(collectAudioData);
         }
     }
+    
     // function collectAudioData() {
     //     const currentTime = audioPlayer1.currentTime;
     //     audioAnalyser.analyser.getFloatTimeDomainData(audioAnalyser.dataArray);

@@ -18,7 +18,7 @@
         --text-dark: #333333;
         --text-light: whitesmoke;
         --border: #195b2b;
-        --lightgreen: lightgreen;
+        --lightgreen: rgb(24, 110, 24);
         --lightgray: lightgray;
         --aquamarine: aquamarine;
 
@@ -111,6 +111,11 @@ canvas {
 
 #start-btn:hover {
     background-color: var(--lightgreen);
+}
+.nav-item.activeMenu {
+    font-weight: bold;
+    color: var(--aquamarine); /* Adjust to your theme color */
+    border-bottom: 2px solid var(--aquamarine);
 }
 
 .navbar {
@@ -325,34 +330,68 @@ main {
     
 }
 
-.menu{
-    /* background-color: #0436136f; */
+.menu {
     width: 80vw;
     height: 75vh;
     display: flex;
     flex-direction: row;
+    border: 2px solid var(--border);
+    border-radius: 18px;
+
 }
+
 .options {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
 }
+
 .options button {
-    background-color: var(--primary-dark);
+    background: linear-gradient(45deg, var(--border), var(--bgMain));
     color: var(--text-light);
-    border-radius: 5px;
+    border: none;
+    border-radius: 8px;
     width: 70%;
     height: 18vh;
     padding: 3px;
     font-size: larger;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }
-.options, .info{
-    background-color:#074b1b5c;
+
+/* Add a hover effect with a gradient reversal for a more interactive feel */
+.options button:hover {
+    background: linear-gradient(45deg, var(--border), var(--primary-light));
+    transform: scale(1.08);
+}
+
+/* Active state to provide feedback when the button is clicked */
+.options button:active {
+    transform: scale(0.98);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.options {
+    /* background-color: var(--primary-light); */
     width: 50%;
-    margin: 2px;
     height: 100%;
 }
+.info {
+    margin-right: 2.5rem;
+    border-radius: 17px;
+    background-color: var(--primary-light);
+    width: 50%;
+    height: 77%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+
 
 .game{
     position: relative;

@@ -1,7 +1,7 @@
 
-import regAudio from './utilities/regAudio.js'
-import PitchVisualizer from './utilities/pitch-visualizer.js';
-import updateMeter from './utilities/updateMeter.js';
+import regAudio from '../utilities/regAudio.js'
+import PitchVisualizer from '../utilities/pitch-visualizer.js';
+import updateMeter from '../utilities/updateMeter.js';
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
+    const emailInput = document.getElementById("email");
+    const emailAlert = document.getElementById("email-regex-alert");
     const confirmPasswordInput = document.getElementById("confirmPassword");
     const usernameLengthAlert = document.getElementById('username-length-alert');
     const passwordLengthAlert = document.getElementById('password-length-alert');
@@ -18,7 +20,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const passwordSpecialAlert = document.getElementById('password-special-alert');
     const confirmPasswordAlert = document.getElementById("password-match");
     
-    const usernameRegex = /^.{5,}$/;  
+    const usernameRegex = /^.{5,}$/; 
+    // const  
     const passwordRegex = {
         length: /^.{6,}$/,                 
         number: /[0-9]/,                   
@@ -72,6 +75,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
             usernameLengthAlert.textContent = "Username needs at least 5 characters";
         }
         checkAll();
+    }
+
+    function checkEmail(){
+
     }
 
     function checkPassword(){
@@ -205,58 +212,7 @@ const regAudioAnalyser = new regAudio(audioContext, volumeBar);
 
 regAudioAnalyser.init()
 
-// updateMeter(audioAnalyser, volumeBar);
 
-
-
-
-
-
-
-// chart ?
-
-google.charts.load('current', {'packages':['gauge']});
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['', 'Value'],
-      ['', 80],
-      ['', 55],
-      ['', 68]
-    ]);
-
-    var options = {
-      width: 300, height: 120,
-      redFrom: 90, redTo: 100,
-      yellowFrom:75, yellowTo: 90,
-      minorTicks: 5
-    };
-
-    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-
-    chart.draw(data, options);
-
-    // setInterval(function() {
-    //   data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-    //   chart.draw(data, options);
-    // }, 13000);
-    // setInterval(function() {
-    //   data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-    //   chart.draw(data, options);
-    // }, 200);
-    // setInterval(function() {
-    //   data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-    //   chart.draw(data, options);
-    // }, 26000);
-
-    setTimeout(()=> {
-        data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-    chart.draw(data, options);
-}, 1000)
-
-  }
 
 
 

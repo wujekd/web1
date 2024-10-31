@@ -1,5 +1,5 @@
-import loginAuth from './utilities/loginAuth.js';
-import { state } from "./utilities/state.js"
+import loginAuth from '../utilities/loginAuth.js';
+import { state } from "../utilities/state.js"
 
 document.addEventListener("DOMContentLoaded", function(){
 

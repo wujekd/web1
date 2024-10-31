@@ -1,14 +1,13 @@
-import AudioAnalyser from './utilities/audio-analyser.js';
-import PitchVisualizer from './utilities/pitch-visualizer.js';
-import updateMeter from './utilities/updateMeter.js';
-import { startNewRound } from './utilities/roundLogic.js';
-import getCurrentLevel from './levels/levels.js';
-import adminEvListeners from './utilities/adminEvListeners.js';
-import { state } from "./utilities/state.js"
-import { saveGame } from './utilities/gamesHistory.js';
-import { showScore } from './utilities/splashScreens.js';
-import { pitchDisplayRefresh } from './utilities/pitchDisplayRefresh.js';
-
+import AudioAnalyser from '../utilities/audio-analyser.js';
+import PitchVisualizer from '../utilities/pitch-visualizer.js';
+import updateMeter from '../utilities/updateMeter.js';
+import { startNewRound } from '../utilities/roundLogic.js';
+import getCurrentLevel from '../levels/levels.js';
+import adminEvListeners from '../utilities/adminEvListeners.js';
+import { state } from "../utilities/state.js"
+import { saveGame } from '../utilities/gamesHistory.js';
+import { showScore } from '../utilities/splashScreens.js';
+import { pitchDisplayRefresh } from '../utilities/pitchDisplayRefresh.js';
 
 const logged = state.getLogged();
 if (!logged){ window.location.href = 'index.html'}
@@ -32,21 +31,14 @@ const visualizer = new PitchVisualizer('pitch-canvas', audioPlayer1.length);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioAnalyser = new AudioAnalyser(audioContext);
 
-
-
-
-
 const level = state.getCurrentLevel();
 const levelData = state.getCurrentLevel();
 const levelMelody = levelData.levelMelody;
-
-
 
 //load audio files based on level data 
 
 visualizer.setTrackLength(audioPlayer1.duration.toFixed(3));
 visualizer.setTarget(levelMelody)   
-
 
 audioAnalyser.init()
     .then(() => {
@@ -58,7 +50,6 @@ audioAnalyser.init()
     .catch(error => {
         console.error('Error initializing audio analyser:', error);
     });
-
 
 updateMeter(audioAnalyser, volumeBar);
 
@@ -96,12 +87,15 @@ function showRoundResult(){
 
 
 function roundEnded(score, noteScores, scoreArray){
-    scores.push([score, noteScores, scoreArray]);
-    if (score > bestRound[0]){
-        bestRound[0] = score;
-        bestRound[1] = roundCount;
-    }
-    roundCount++;
+    scoreArray.forEach(e => {
+        console.log(e);
+    });
+    // scores.push([score, noteScores, scoreArray]);
+    // if (score > bestRound[0]){
+    //     bestRound[0] = score;
+    //     bestRound[1] = roundCount;
+    // }
+    // roundCount++;
 
     // if (roundCount > 2){
     if (true){
@@ -128,6 +122,5 @@ readyBtn.addEventListener("click", ()=>{
         splash.style.display = "none"
     })
 })
-
 
 adminEvListeners(audioAnalyser)
