@@ -9,6 +9,9 @@ import { saveGame } from '../utilities/gamesHistory.js';
 import { showScore } from '../utilities/splashScreens.js';
 import { pitchDisplayRefresh } from '../utilities/pitchDisplayRefresh.js';
 
+import setGoToScoreTable from "../utilities/scoreTableBtn.js";
+setGoToScoreTable(document.getElementById("scoreTableButton"));
+
 const logged = state.getLogged();
 if (!logged){ window.location.href = 'index.html'}
 

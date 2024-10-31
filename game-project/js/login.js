@@ -1,6 +1,9 @@
 import loginAuth from '../utilities/loginAuth.js';
 import { state } from "../utilities/state.js"
 
+import setGoToScoreTable from "../utilities/scoreTableBtn.js";
+setGoToScoreTable(document.getElementById("scoreTableButton"));
+
 document.addEventListener("DOMContentLoaded", function(){
 
     const loginForm = document.querySelector('.login');

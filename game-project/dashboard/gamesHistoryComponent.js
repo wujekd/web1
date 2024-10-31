@@ -67,6 +67,14 @@ export const gamesHistoryComponent = {
 
     },
 
+    setNavbarHighlight: (btn)=>{
+        if(btn == "scoreTable"){
+
+        } else {
+            
+        }
+    }
+
 
     showUserGames: ()=>{
         gamesHistoryComponent.displaying = "userGames";

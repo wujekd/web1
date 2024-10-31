@@ -2,6 +2,8 @@
 import regAudio from '../utilities/regAudio.js'
 import PitchVisualizer from '../utilities/pitch-visualizer.js';
 import updateMeter from '../utilities/updateMeter.js';
+import setGoToScoreTable from "../utilities/scoreTableBtn.js";
+setGoToScoreTable(document.getElementById("scoreTableButton"));
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
