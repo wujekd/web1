@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information and stylesheet link -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- Navigation bar with links to other pages -->
     <nav class="navbar">
         <div class="nav-links">
             <a href="index.html" class="nav-item">Menu</a>
@@ -17,23 +19,25 @@
         </div>
     </nav>
 
-    <!-- Login Form -->
+    <!-- Login Form Container -->
     <div class="cont login registration borderMain">
-    <form class="cont registration">
-        <!-- Form fields for login -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <!-- Form for user login -->
+        <form class="cont registration">
+            <!-- Input field for username -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+            <!-- Input field for password -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-        <button id="loginBtn" class="register-btn" type="submit">Login</button>
-    </form>
+            <!-- Submit button for login -->
+            <button id="loginBtn" class="register-btn" type="submit">Login</button>
+        </form>
+    </div>
 
-</div>
 
-    <div id="message"></div>
-
+    <!-- JavaScript module for login functionality -->
     <script src="./js/login.js" type="module" defer></script>
 </body>
 </html>

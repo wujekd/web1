@@ -256,9 +256,9 @@ canvas {
     background-color: var(--primary-light);
     width: 90%;
     /* height: 4rem; */
-    top: 12%;
+    top: 5%;
     z-index: 30;
-    height: 75%;
+    height: 90%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -270,8 +270,8 @@ canvas {
     transition: top 2s ease, height 1s ease 0.2s;
 }
 .regAlert.down{
-    top: 85%;
-    height: 55%;
+    top: 95%;
+    height: 60%;
 
 }
 .regAlert p {
@@ -343,7 +343,8 @@ main {
 .options {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 3rem;
     align-items: center;
 }
 
@@ -353,7 +354,7 @@ main {
     border: none;
     border-radius: 8px;
     width: 70%;
-    height: 18vh;
+    height: 22vh;
     padding: 3px;
     font-size: larger;
     font-weight: bold;
@@ -379,6 +380,15 @@ main {
     width: 50%;
     height: 100%;
 }
+#menuHeader {
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjusts for content alignment */
+    padding: 10px 20px; /* Adds padding for a cleaner look */
+    margin-bottom: 12rem;
+    z-index: 10; /* Ensures it stays above other content */
+}
 .info {
     margin-right: 2.5rem;
     border-radius: 17px;
@@ -388,6 +398,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 5px;
 }
 
@@ -570,6 +581,7 @@ pitch-canvas{
 }
 .metersDiv{
     display: flex;
+    gap: 3rem
 }
 .infoDash{
     display: flex;
@@ -577,7 +589,8 @@ pitch-canvas{
 }
 .gameDetails{
     display: flex;
-    align-items: center;
+    width: 100%;
+    justify-content: space-around;
 }
 .gameInfo{
     border: 3px solid #041308;

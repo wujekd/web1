@@ -4,27 +4,25 @@ import { displayComponent } from "./displayComponent.js";
 import { resetViewSetting } from "../utilities/scoreTableBtn.js";
 
 import setGoToScoreTable from "../utilities/scoreTableBtn.js";
+
+// Set up the "Score Table" button functionality
 setGoToScoreTable(document.getElementById("scoreTableNavBarButton"));
 
+// Initialize components when the document is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener("DOMContentLoaded", ()=>{
+    // Load Google Charts library for displaying gauges
+    google.charts.load('current', { 'packages': ['gauge'] });
 
-    google.charts.load('current', {'packages':['gauge']});
+    lvlsComponent.render(); // Render levels component
+    gamesHistoryComponent.render(); // Render games history component
+    displayComponent.init(); // Initialize display component
 
-    console.log(document.querySelector("#scoreTableNavBarButton"))
-
-    lvlsComponent.render();
-    gamesHistoryComponent.render();
-    displayComponent.init();
-    
-
+    // Check saved view setting and adjust view if set to "scoreTable"
     const viewSetting = JSON.parse(localStorage.getItem("viewSetting"));
-    if (viewSetting.view == "scoreTable"){
-        gamesHistoryComponent.showScoreTable();
-        resetViewSetting();
-        
-
+    if (viewSetting.view == "scoreTable") {
+        gamesHistoryComponent.showScoreTable(); // Show score table
+        gamesHistoryComponent.sortGamesBy("score"); // Sort games by score
+        resetViewSetting(); // Reset view setting in storage
     }
-
-
-})
+});

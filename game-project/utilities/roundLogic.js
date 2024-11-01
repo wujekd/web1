@@ -27,23 +27,6 @@ export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelo
         }
     }
     
-    // function collectAudioData() {
-    //     const currentTime = audioPlayer1.currentTime;
-    //     audioAnalyser.analyser.getFloatTimeDomainData(audioAnalyser.dataArray);
-
-    //     const pitch = audioAnalyser.autoCorrelate(audioAnalyser.dataArray, audioAnalyser.audioContext.sampleRate);
-    //     if (pitch !== -1 && currentTime !== lastTime) {
-    //         const roundedPitch = Number(pitch.toFixed(2)); 
-    //         scoreArray.push({ time: currentTime, pitch: roundedPitch });
-    //         lastTime = currentTime; 
-    //     }
-
-    //     visualizer.update(pitch, currentTime);
-
-    //     if (!audioPlayer1.paused && !audioPlayer1.ended) {
-    //         requestAnimationFrame(collectAudioData);
-    //     }
-    // }
 
     const playListener = () => {
         requestAnimationFrame(collectAudioData);
@@ -74,12 +57,6 @@ function addScore(scoreData, levelMelody) {
 
         if (matchingNotes.length > 0) {
             let noteScore = 0;
-            // matchingNotes.forEach(point => {
-            //     const pitchDifference = Math.abs(point.pitch - targetNote.frequency);
-            //     const maxScorePerNote = 100;
-            //     const score = Math.max(0, maxScorePerNote - pitchDifference);
-            //     noteScore += score;
-            // });
 
             matchingNotes.forEach(point => {
                 let score = 0;

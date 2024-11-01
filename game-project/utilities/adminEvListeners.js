@@ -1,3 +1,5 @@
+// event listeners for admin panel in the game
+
 export default function(audioAnalyser, visualizer){
 
     document.getElementById('muteMic').addEventListener('click', () => {

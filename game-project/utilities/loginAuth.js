@@ -1,14 +1,18 @@
-export default function(username, password){
+// Function to validate user credentials
+export default function(username, password) {
     let users = JSON.parse(localStorage.getItem('users')) || [];
- 
-        const user = users.find(user => user.username === username);
-        if (user){
-            if (password == user.password){
-                return true;
-            } else {
-                return false;
-            }
+    
+    // Find user by username
+    const user = users.find(user => user.username === username);
+    
+    // Check if user exists and password matches
+    if (user) {
+        if (password == user.password) {
+            return true; // Valid credentials
         } else {
-            return null;
+            return false; // Invalid password
         }
+    } else {
+        return null; // User not found
+    }
 }

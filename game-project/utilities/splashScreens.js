@@ -1,3 +1,5 @@
+
+// construct score splash screen
 export function showScore(score, scoreSplash){
     scoreSplash.style.display = "flex";
     scoreSplashDisplay.textContent = score.toString();

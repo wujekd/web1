@@ -1,24 +1,23 @@
 const menuElement = document.querySelector(".menu");
 import { state } from "../utilities/state.js";
-
 import setGoToScoreTable from "../utilities/scoreTableBtn.js";
+
+// Set up the "Score Table" button functionality
 setGoToScoreTable(document.getElementById("scoreTableButton"));
 
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-    
-
-    function renderMenu(logged, top, games) {
+    // Renders the menu based on the user's login status
+    function renderMenu(logged) {
         const optionsDiv = menuElement.querySelector(".options");
         const infoDiv = menuElement.querySelector(".info");
 
-        
-        if (logged) {
-            
-            infoDiv.innerHTML = `<h3>Welcome ${state.getLogged()}!</h3>`;
+        // If user is logged in, show play and logout options
+        if (logged != "false") {
+            infoDiv.innerHTML = `<h3 id="menuHeader">Welcome ${state.getLogged()}!</h3>
+                                 <p>Click Play to begin</p>`;
             optionsDiv.innerHTML = `
                 <button class="menu-btn" id="playBtn">Play</button>
-                <button class="menu-btn" id="scoresBtn">Scores</button>
                 <button class="menu-btn" id="logoutBtn">Log Out</button>
             `;
 
@@ -26,22 +25,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 window.location.href = "dash.html";
             });
 
-            optionsDiv.querySelector('#scoresBtn').addEventListener("click", () => {
-                window.location.href = "scores.html"; 
-            });
-
             optionsDiv.querySelector('#logoutBtn').addEventListener("click", () => {
-                state.setLogged(false)
+                state.setLogged(false);
                 window.location.href = "index.html";
             });
 
+        // If user is not logged in, show register and login options
         } else {
-
-            infoDiv.innerHTML = `<h3>Welcome!</h3><p>You need to log in to play.</p>`;
+            infoDiv.innerHTML = `<h3 id="menuHeader">Welcome, stranger!</h3><p>You need to log in to play.</p>`;
             optionsDiv.innerHTML = `
                 <button class="menu-btn" id="registerBtn">Register</button>
                 <button class="menu-btn" id="loginBtn">Login</button>
-                <button class="menu-btn" id="scoresBtn">Scores</button>
             `;
 
             optionsDiv.querySelector('#registerBtn').addEventListener("click", () => {
@@ -51,13 +45,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
             optionsDiv.querySelector('#loginBtn').addEventListener("click", () => {
                 window.location.href = "login.html";
             });
-
-            optionsDiv.querySelector('#scoresBtn').addEventListener("click", () => {
-                window.location.href = "scores.html";
-            });
         }
     }
 
+    // Initial rendering of the menu
     renderMenu(state.getLogged());
 
 });

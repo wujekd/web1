@@ -13,7 +13,8 @@ import setGoToScoreTable from "../utilities/scoreTableBtn.js";
 setGoToScoreTable(document.getElementById("scoreTableButton"));
 
 const logged = state.getLogged();
-if (!logged){ window.location.href = 'index.html'}
+console.log(logged);
+if (logged == "false"){ window.location.href = 'login.html'}
 
 const volumeBar = document.getElementById('volume-bar');
 const scoreSplash = document.getElementById("scoreSplash");
@@ -43,6 +44,7 @@ const levelMelody = levelData.levelMelody;
 visualizer.setTrackLength(audioPlayer1.duration.toFixed(3));
 visualizer.setTarget(levelMelody)   
 
+//async audio engine initialisation
 audioAnalyser.init()
     .then(() => {
         audioAnalyser.startPitchDetection(pitch => {
@@ -54,8 +56,10 @@ audioAnalyser.init()
         console.error('Error initializing audio analyser:', error);
     });
 
+//update audio meter
 updateMeter(audioAnalyser, volumeBar);
 
+//plays demo and triggers main file playback when it ends
 function playDemo() {
     backingPlayer.play();
     clickPlayer.play();
@@ -65,7 +69,7 @@ function playDemo() {
     });
 }
 
-
+//starts a new round
 function initRound(){
     backingPlayer.play();
     clickPlayer.play();
@@ -74,6 +78,7 @@ function initRound(){
     });
 }
 
+//displaying the splash after the first round
 const roundResultSplash = document.getElementById("roundResultSplash");
 const finishRoundBtn = document.getElementById("finishRoundBtn");
 function showRoundResult(){
@@ -81,11 +86,10 @@ function showRoundResult(){
     roundResultSplash.style.opacity = "100%";
 
     finishRoundBtn.addEventListener("click", ()=>{
-        window.location.replace("dashboard/dash.html");
+        window.location.replace("dash.html");
     })
     
-    // final animations
-    // add beat
+
 }
 
 
@@ -93,16 +97,15 @@ function roundEnded(score, noteScores, scoreArray){
     scoreArray.forEach(e => {
         console.log(e);
     });
-    // scores.push([score, noteScores, scoreArray]);
-    // if (score > bestRound[0]){
-    //     bestRound[0] = score;
-    //     bestRound[1] = roundCount;
-    // }
-    // roundCount++;
+    scores.push([score, noteScores, scoreArray]);
+    if (score > bestRound[0]){
+        bestRound[0] = score;
+        bestRound[1] = roundCount;
+    }
+    roundCount++;
 
-    // if (roundCount > 2){
-    if (true){
-        // console.log(state.getLogged());
+    // save game and show final result after second round
+    if (roundCount > 1){
         saveGame(state.getLogged(), level.id, score, noteScores, scoreArray);
         showRoundResult()
 
@@ -111,7 +114,7 @@ function roundEnded(score, noteScores, scoreArray){
     }
 }
 
-
+// setting up the start button
 const startBtn = document.getElementById("start-btn");
 startBtn.addEventListener("click", ()=>{ 
     initRound()

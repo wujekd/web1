@@ -103,9 +103,10 @@ export const gamesHistoryComponent = {
             
             gameButton.innerHTML = `
                 <div class="gameInfo">
-                    <h3>Level: ${game.level}</h3>
+                    <h5>Level: ${game.level}</h5>
+                    <h5>Score: ${game.overallScore}</h5>
                     <p>Date: ${new Date(game.date).toLocaleDateString()}</p>
-                    <p>Score: ${game.overallScore}</p>
+                    
                 </div>
             `;
             gameButton.addEventListener("click", () => {
@@ -132,9 +133,11 @@ export const gamesHistoryComponent = {
             
             gameButton.innerHTML = `
                 <div class="gameInfo">
-                    <h3>Score: ${game.overallScore}</h3>
-                    <p>Date: ${new Date(game.date).toLocaleDateString()}</p>
+                    <h5>Score: ${game.overallScore}</h5>
                     <p>Level: ${game.level}</p>
+                    <h5>User: ${game.user}</h5>
+                    <p>Date: ${new Date(game.date).toLocaleDateString()}</p>
+                    
                 </div>
             `;
             gameButton.addEventListener("click", () => {
@@ -144,6 +147,7 @@ export const gamesHistoryComponent = {
             element.appendChild(gameButton); 
             
         });
+        // gamesHistoryComponent.sortGamesBy("score");
     },
 
     

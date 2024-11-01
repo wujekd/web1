@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information and stylesheet link -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch Game</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    
+    <!-- Navigation bar with links to various sections of the application -->
     <nav class="navbar">
         <div class="nav-links">
             <a href="index.html" class="nav-item">Menu</a>
             <a href="./dashboard/dash.html" class="nav-item activeMenu">Game</a>
+            <a id="scoreTableButton" class="nav-item">Score Table</a>
             <a href="register.html" class="nav-item">Register</a>
             <a href="login.html" class="nav-item">Login</a>
-            <a href="score-table.html" class="nav-item">Score Table</a>
         </div>
     </nav>
+
+    <!-- Main content of the page -->
     <main>
+        <!-- Game container -->
         <div class="game">
+            
+            <!-- Admin Panel with control buttons for testing and managing audio -->
             <div class="cont adminPanel">
                 <button id="testyBtn">testy</button>
                 <button id="log-freq">log pre processing LPF freq</button>
@@ -25,11 +33,14 @@
                 <button id="muteAudio">Mute Audio</button>
                 <button id="unmuteMic">Unmute Mic</button>
                 <button id="unmuteAudio">Unmute Audio</button>
-               
             </div>
-            <div class="cont bottomDisplay">
-                <div class="topSetion">
 
+            <!-- Bottom Display area containing game round details, volume meter, and controls -->
+            <div class="cont bottomDisplay">
+                
+                <!-- Top section for displaying game score and pitch info -->
+                <div class="topSetion">
+                    <!-- Score display for multiple rounds -->
                     <div class="score">
                         <h3>Round 1:</h3>
                         <h3>Round 2:</h3>
@@ -38,37 +49,54 @@
                         <h2 class="score2">-</h2>
                         <h2 class="score3">-</h2>
                     </div>
+
+                    <!-- Volume meter display -->
                     <div id="volume-meter" style="margin: 5px; width: 280px; height: 30px; background-color: lightgray;">
                         <div id="volume-bar" style="height: 100%; width: 0%; background-color: green;"></div>
                     </div>
 
+                    <!-- Button to start the game round -->
                     <button id="start-btn">START ROUND 1</button>
+
+                    <!-- Display for showing current pitch frequency -->
                     <div id="pitch-display">Pitch: -- Hz</div>
                 </div>
+
+                <!-- Canvas for visualizing pitch data -->
                 <canvas id="pitch-canvas" width="1200" height="640"></canvas>
+
+                <!-- Audio player for demo recordings in the game -->
                 <audio src="./levels/lvl2/test1.mp3" id="player1"></audio>
             </div>
-            
         </div>
+
+        <!-- Splash screen with buttons for listening and starting the game -->
         <div class="splash">
             <button id="listenBtn">listen</button>
             <button id="readyBtn">I'm ready!</button>
         </div>
+
+        <!-- Score splash display showing the player's score after a round -->
         <div id="scoreSplash">
             <h3>Your score is:</h3>
             <h2 id="scoreSplashDisplay">-</h2>
             <button id="scoreSplashContinueBtn">Continue</button>
         </div>
+
+        <!-- Round result splash screen with score table and continuation option -->
         <div id="roundResultSplash">
             <h1>Score Table</h1>
             <p>round details</p>
             <p>testy</p>
             <button id="finishRoundBtn">Continue</button>
         </div>
-        
     </main>
+
+    <!-- audio players for the backing track and -->
     <audio id="backingPlayer" src="./levels/lvl2/backing_lvl2.mp3"></audio>
     <audio id="clickPlayer" src="./levels/lvl2/click_lvl2.mp3"></audio>
-    <script type="module" src="./game.js" defer></script>
+
+    <!-- JavaScript module controlling game logic -->
+    <script type="module" src="./js/game.js" defer></script>
 </body>
 </html>

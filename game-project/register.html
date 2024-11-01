@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information and stylesheet link -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <!-- Google Charts library for displaying charts in the form -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     
+    <!-- Navigation bar with links to other pages -->
     <nav class="navbar">
         <div class="nav-links">
             <a href="index.html" class="nav-item">Menu</a>
             <a href="dash.html" class="nav-item">Game</a>
             <a id="scoreTableButton" class="nav-item">Score Table</a>
             <a href="register.html" class="nav-item activeMenu">Register</a>
-           
             <a href="login.html" class="nav-item">Login</a>
         </div>
     </nav>
 
-
+    <!-- Registration form with input fields and validation messages -->
     <form class="cont registration borderMain">
+        <!-- Decorative images representing reels -->
         <img src="./images/tape.png" alt="reel" id="reel1">
         <img src="./images/tape.png" alt="reel" id="reel2">
         <img src="./images/tape.png" alt="reel" id="reel3">
         <img src="./images/tape.png" alt="reel" id="reel4">
 
+        <!-- Chart area above the form -->
         <div id="chart_div" style="width: 400px; height: 120px; position: absolute; top: -105px; z-index: -3"></div>
 
-
+        <!-- Loading bar and title for registration process -->
         <div class="regLoadingBar borderMain" style="color: black; display: flex; justify-content: center; align-items: center; font-size: 1.6rem;">
             <p style="position: absolute;">CREATE AN ACCOUNT</p>
-                <div id="volume-bar" style="height: 100%; width: 30%; background-color: rgba(9, 61, 9, 0.643);"></div>
+            <div id="volume-bar" style="height: 100%; width: 30%; background-color: rgba(9, 61, 9, 0.643);"></div>
         </div>
+
+        <!-- Validation alert messages -->
         <div class="regAlert borderMain">
             <p id="username-length-alert" class="">Username needs at least 5 characters</p>
             <p id="email-regex-alert" class="">Enter a valid e-mail address</p>
+            <p id="phone-regex-alert" class="">Enter a valid phone number</p>
             <p id="password-length-alert" class="">Password has to be at least 6 characters long</p>
             <p id="password-number-alert" class="">Password has to include a number</p>
             <p id="password-special-alert" class="">Password has to include a special character</p>
@@ -44,26 +51,35 @@
             <button id="regStartBtn">Continue...</button>
         </div>
         
+        <!-- Input fields for registration details -->
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
+        
         <label for="email">E-mail:</label>
         <input type="text" id="email" name="email">
+        
+        <label for="number">Phone Number:</label>
+        <input type="text" id="phone" name="phone">
+        
         <label for="password">Password:</label>
         <input type="text" id="password" name="password" required>
+        
         <label for="confirmPassword">Confirm Password:</label>
         <input type="text" id="confirmPassword" required>
 
+        <!-- Submit button for the form, initially disabled -->
         <button id="registerBtn" disabled class="register-btn disabled" type="submit">Register</button>
-        
     </form>
+    
+    <!-- Message area for form submission status -->
     <div id="message"></div>
 
+    <!-- Footer with audio player -->
     <footer>
         <audio src="./levels/beat with no guitar.mp3" controls id="player1"></audio>
     </footer>
     
-    
-
+    <!-- JavaScript module for registration functionality -->
     <script src="./js/register.js" type="module" defer></script>
 </body>
 </html>

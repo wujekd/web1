@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information and stylesheet link -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pitch Game</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    
+    <!-- Google Charts library for visualizations -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Navigation bar with links to different sections of the app -->
     <nav class="navbar">
         <div class="nav-links">
             <a href="./index.html" class="nav-item">Menu</a>
@@ -18,78 +23,92 @@
         </div>
     </nav>
     
+    <!-- Main content area -->
     <main>
-
-        
+        <!-- Dashboard container with display, levels list, and history -->
         <div class="dash">
+            
+            <!-- Left container with pitch display and level list -->
             <div class="leftContainer">
+                
+                <!-- Display area with pitch canvas and user account button -->
                 <div class="dashDisplay">
                     <div class="screen">
-                        
                         <canvas id="pitch-canvas" width="300" height="400"></canvas>
                         <button class="showAccountBtn">go to your account</button>
-                            
-                            <div class="infoDash">
-    
-                            </div>
-                    
+                        
+                        <!-- Info section for user account display -->
+                        <div class="infoDash"></div>
                     </div>
                 </div>
+
+                <!-- List of game levels -->
                 <div class="leveList">
-                    
                     <h1>levels:</h1>
                 </div>
             </div>
+
+            <!-- Right container for game history and sorting options -->
             <div class="historyHolder">
+                
+                <!-- History menu with navigation buttons -->
                 <div class="historyMenu">
                     <button id="urGamesbtn">Your Games</button>
                     <button id="scoreTableBtn">Score Table</button>
                 </div>
+                
+                <!-- Sorting options for history records -->
                 <div class="sort">
                     <div class="sortInner">
                         <button id="sortScore">by score</button>
                         <button id="sortLvl">by levels</button>
                         <button id="sortDate">by date</button>
                     </div>
-                    <div class="historyLevels">
-                        
-                    </div>
+
+                    <!-- Display for filtered history levels -->
+                    <div class="historyLevels"></div>
                     <br/>
                     <h3>all games:</h3>
-                    
                 </div>
+                
+                <!-- Container for displaying history of games -->
                 <div class="gamesHistory"></div>
             </div>
         </div>
     </main>
 
+    <!-- Template for displaying user information -->
     <template id="userInfoTemplate">
         <div>
-            
             <h3>Hello, <span id="userName"></span></h3>
             <h3>Games played: <span id="gameCount"></span></h3>
+            <h3>Email: <span id="userEmail"></span></h3>
+            <h3>Phone: <span id="userPhone"></span></h3>
         </div>
     </template>
+
+    <!-- Template for displaying game details in the history -->
     <template id="gameDetailsTemplate">
-            <div class="gameDetails">
-                <div>
-                    <p id="levelInfo"></p>
-                    <p id="dateInfo"></p>
-                    <p id="scoreInfo"></p>
-                </div>
+        <div class="gameDetails">
+            <div>
+                <p id="levelInfo"></p>
+                <p id="dateInfo"></p>
+                <p id="scoreInfo"></p>
             </div>
+        </div>
     </template>
+
+    <!-- Template for displaying level information -->
     <template id="levelInfoTemplate">
         <div class="levelInfo">
             <p id="name"></p>
             <p id="tempo"></p>
             <p id="description"></p>
             <button id="play"></button>
-            
         </div>
     </template>
 
-
+    <!-- JavaScript module controlling dashboard functionality -->
     <script type="module" src="./dashboard/dash.js" defer></script>
 </body>
 </html>
