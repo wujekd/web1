@@ -1,3 +1,4 @@
+
 import { gamesHistoryComponent } from "./gamesHistoryComponent.js";
 import { lvlsComponent } from "./lvlsComponent.js";
 import { displayComponent } from "./displayComponent.js";

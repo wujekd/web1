@@ -24,10 +24,10 @@ export const displayComponent = {
         const div = template.content.cloneNode(true).firstElementChild;
         const gameCount = gamesHistoryComponent.games.length;
 
-        div.querySelector('#userName').textContent = displayComponent.logged;
+        div.querySelector('#userName').textContent = ((displayComponent.logged == "false") ? "Login first!" : displayComponent.logged)
         div.querySelector('#gameCount').textContent = gameCount;
-        div.querySelector('#userEmail').textContent = displayComponent.email || "No email provided";
-        div.querySelector('#userPhone').textContent = displayComponent.phone || "No phone number provided";
+        div.querySelector('#userEmail').textContent = displayComponent.email || "---";
+        div.querySelector('#userPhone').textContent = displayComponent.phone || "---";
 
         displayComponent.infoDash.innerHTML = "";
         displayComponent.infoDash.append(div);

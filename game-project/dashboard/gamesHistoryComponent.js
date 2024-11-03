@@ -18,11 +18,11 @@ export const gamesHistoryComponent = {
         const historyLevelsDiv = document.querySelector(".historyLevels");
         
         lvlsComponent.lvList.forEach((lvl, index)=>{
-                const btn = document.createElement("button")
-                btn.textContent = `${lvl.id}`
-                btn.classList.add("historyLvlBtn")
-                btn.addEventListener("click", ()=> gamesHistoryComponent.sortGamesBy(Number(btn.textContent)))
-                historyLevelsDiv.appendChild(btn)
+                const btn = document.createElement("button");
+                btn.textContent = `${lvl.id}`;
+                btn.classList.add("historyLvlBtn");
+                btn.addEventListener("click", ()=> gamesHistoryComponent.sortGamesBy(Number(btn.textContent)));
+                historyLevelsDiv.appendChild(btn);
             });
 
         const sortbyScoreBtn = document.getElementById("sortScore");
@@ -36,6 +36,7 @@ export const gamesHistoryComponent = {
             btn.addEventListener("click", ()=> gamesHistoryComponent.sortGamesBy(Number(btn.textContent)))
         })
 
+        
 
         const sortLvlBtn = document.getElementById("sortLvl");
 
@@ -92,6 +93,10 @@ export const gamesHistoryComponent = {
 
         gamesHistoryComponent.setNavbarHighlight("games")
 
+        const historyModeDisplay = document.getElementById("historyModeDisplay")
+        historyModeDisplay.textContent = "Your Games:"
+
+
         gamesHistoryComponent.displaying = "userGames";
         const element = document.querySelector(".gamesHistory");
         element.innerHTML = "";
@@ -102,18 +107,30 @@ export const gamesHistoryComponent = {
             gameButton.classList.add("game-item");
             
             gameButton.innerHTML = `
-                <div class="gameInfo">
+            <div class="gameInfo" style="position: relative">
+                <div style="width: 100%; text-align: left;">
+                    <div id="meter" style="height: 10px; width: 0%; background-color: black; margin: 3px 0; transition: width 0.6s ease;"></div>
+                </div>
+                
+                <div>
                     <h5>Level: ${game.level}</h5>
                     <h5>Score: ${game.overallScore}</h5>
                     <p>Date: ${new Date(game.date).toLocaleDateString()}</p>
-                    
                 </div>
-            `;
+            </div>
+        `;
+        
+        
             gameButton.addEventListener("click", () => {
                 
                 gamesHistoryComponent.select(game);
             });
-            element.appendChild(gameButton); 
+            element.appendChild(gameButton);
+
+            const meter = gameButton.querySelector("#meter");
+            setTimeout(() => {
+                meter.style.width = `${game.overallScore}%`;
+            }, 1);
         });
     },
 
@@ -121,6 +138,10 @@ export const gamesHistoryComponent = {
     showScoreTable: ()=>{
         
         gamesHistoryComponent.setNavbarHighlight("scoreTable")
+
+        const historyModeDisplay = document.getElementById("historyModeDisplay")
+        historyModeDisplay.textContent = "Score Table:"
+
 
         gamesHistoryComponent.displaying = "scoreTable"
         const element = document.querySelector(".gamesHistory");
@@ -133,6 +154,9 @@ export const gamesHistoryComponent = {
             
             gameButton.innerHTML = `
                 <div class="gameInfo">
+                <div style="width: 100%; text-align: left;">
+                    <div id="meter" style="height: 10px; width: 0%; background-color: black; margin: 3px 0; transition: width 0.6s ease;"></div>
+                </div>
                     <h5>Score: ${game.overallScore}</h5>
                     <p>Level: ${game.level}</p>
                     <h5>User: ${game.user}</h5>
@@ -145,9 +169,13 @@ export const gamesHistoryComponent = {
                 gamesHistoryComponent.select(game);
             });
             element.appendChild(gameButton); 
+
+            const meter = gameButton.querySelector("#meter");
+            setTimeout(() => {
+                meter.style.width = `${game.overallScore}%`;
+            }, 1);
             
         });
-        // gamesHistoryComponent.sortGamesBy("score");
     },
 
     

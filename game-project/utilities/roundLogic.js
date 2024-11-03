@@ -18,6 +18,17 @@ export function startNewRound(audioPlayer1, audioAnalyser, visualizer, levelMelo
             const roundedPitch = pitch !== -1 ? Number(pitch.toFixed(2)) : 0; // Use 0 as placeholder for no pitch
             scoreArray.push({ time: currentTime, pitch: roundedPitch });
             lastTime = currentTime;
+
+
+
+            // if rounded pitch is a digit and its != to filter freq,
+            //set filter freq to rounded pitch * 1.4
+
+            //set lpf freq
+
+            if (roundedPitch =! audioAnalyser.LPFreq){
+                audioAnalyser.LPFreq = roundedPitch
+            }
         }
     
         visualizer.update(pitch, currentTime);
