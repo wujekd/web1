@@ -8,7 +8,6 @@ import { state } from "../utilities/state.js"
 import { saveGame } from '../utilities/gamesHistory.js';
 import { showScore } from '../utilities/splashScreens.js';
 import { pitchDisplayRefresh } from '../utilities/pitchDisplayRefresh.js';
-
 import setGoToScoreTable from "../utilities/scoreTableBtn.js";
 setGoToScoreTable(document.getElementById("scoreTableButton"));
 
@@ -22,7 +21,7 @@ const scoreSplashDisplay = document.getElementById("scoreSplashDisplay");
 const scoreSplashContinueBtn = document.getElementById("scoreSplashContinueBtn");
 let roundCount = 0
 let scores = []
-let bestRound = [0, null];
+let bestRound = [Infinity, null];
 const listenBtn = document.getElementById('listenBtn');
 const readyBtn = document.getElementById("readyBtn");
 const splash = document.querySelector(".splash")
@@ -84,6 +83,20 @@ const finishRoundBtn = document.getElementById("finishRoundBtn");
 function showRoundResult(){
     roundResultSplash.style.display = "flex";
     roundResultSplash.style.opacity = "100%";
+    const round1score = document.getElementById("round1score");
+    const round2score = document.getElementById("round2score");
+    const winningRoundDisplay = document.getElementById("betterRound");
+    round1score.textContent = `scores ${scores[0][0]}`;
+    round2score.textContent = `scores ${scores[1][0]}`;
+    console.log(scores)
+
+
+    if (scores[0][0] > scores[1][0]) {
+        winningRoundDisplay.textContent = '1';
+    } else {
+        winningRoundDisplay.textContent = '2';
+    }
+
 
     finishRoundBtn.addEventListener("click", ()=>{
         window.location.replace("dash.html");
@@ -94,11 +107,9 @@ function showRoundResult(){
 
 
 function roundEnded(score, noteScores, scoreArray){
-    scoreArray.forEach(e => {
-        console.log(e);
-    });
+
     scores.push([score, noteScores, scoreArray]);
-    if (score > bestRound[0]){
+    if (score < bestRound[0]){
         bestRound[0] = score;
         bestRound[1] = roundCount;
     }
@@ -123,6 +134,10 @@ startBtn.addEventListener("click", ()=>{
 listenBtn.addEventListener("click", playDemo)
 
 readyBtn.addEventListener("click", ()=>{
+
+    audioAnalyser.demo2output(0);
+    audioAnalyser.mic2analyser(1);
+
     splash.style.opacity = "0%"
     splash.addEventListener("transitionend", ()=>{
         splash.style.display = "none"
