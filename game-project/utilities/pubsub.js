@@ -1,26 +1,27 @@
 export const pubsub = {
+  events: {},
 
-    events: {},
+  // Subscribe to the event and pass a callback
+  subscribe: function (eventId, callback) {
+    this.events[eventId] = this.events[eventId] || [];
+    this.events[eventId].push(callback);
+  },
 
-    //subscribe to the event and pass a callback
-    subscribe: function(evName, fn) {
-      this.events[evName] = this.events[evName] || [];
-      this.events[evName].push(fn);
-    },
-
-    //remove subscription
-    unsubscribe: function(evName, fn) {
-      if (this.events[evName]) {
-        this.events[evName] = this.events[evName].filter(f => f !== fn);
-      }
-    },
-
-    //method to trigger all subscribed callback functions
-    publish: function(evName, data) {
-      if (this.events[evName]) {
-        this.events[evName].forEach(f => {
-          f(data);
-        });
-      }
+  // Remove subscription
+  unsubscribe: function (eventId, callback) {
+    if (this.events[eventId]) {
+      this.events[eventId] = this.events[eventId].filter(
+        (cb) => cb !== callback
+      );
     }
-  };
+  },
+
+  // Method to trigger all subscribed callback functions
+  publish: function (eventId, data) {
+    if (this.events[eventId]) {
+      this.events[eventId].forEach((cb) => {
+        cb(data);
+      });
+    }
+  },
+};

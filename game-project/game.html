@@ -13,7 +13,7 @@
     <nav class="navbar">
         <div class="nav-links">
             <a href="index.html" class="nav-item">Menu</a>
-            <a href="./dashboard/dash.html" class="nav-item activeMenu">Game</a>
+            <a href="dash.html" class="nav-item activeMenu">Game</a>
             <a id="scoreTableButton" class="nav-item">Score Table</a>
             <a href="register.html" class="nav-item">Register</a>
             <a href="login.html" class="nav-item">Login</a>
@@ -26,8 +26,7 @@
         <div class="game">
             
             <!-- Admin Panel with control buttons for testing and managing audio -->
-            <div class="cont adminPanel"
-            style="display: none;">
+            <div class="cont adminPanel" style="display: none;">
                 <button id="testyBtn">testy</button>
                 <button id="log-freq">log pre processing LPF freq</button>
                 <button id="muteMic">Mute Mic</button>
@@ -70,16 +69,17 @@
 
         <!-- Score splash display showing the player's score after a round -->
         <div id="scoreSplash">
-            <h3>Your score is:</h3>
+            <h3>Your score for round1 is:</h3>
             <h2 id="scoreSplashDisplay">-</h2>
             <button id="scoreSplashContinueBtn">Continue</button>
         </div>
 
         <!-- Round result splash screen with score table and continuation option -->
         <div id="roundResultSplash">
-            <h1>Score Table</h1>
-            <p>round details</p>
-            <p>testy</p>
+            <h1>Game Results:</h1>
+            <p>round 1 score: <b id="round1score"></b></p>
+            <p>round 2 score: <b id="round2score"></b></p>
+            <p>round <b id="betterRound"></b> will be saved!</p>
             <button id="finishRoundBtn">Continue</button>
         </div>
     </main>
@@ -88,7 +88,7 @@
     <audio id="backingPlayer" src="./levels/lvl2/backing_lvl2.mp3"></audio>
     <audio id="clickPlayer" src="./levels/lvl2/click_lvl2.mp3"></audio>
 
-    <!-- JavaScript module controlling game logic -->
+ 
     <script type="module" src="./js/game.js" defer></script>
 </body>
 </html>
